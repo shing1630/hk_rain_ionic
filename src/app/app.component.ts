@@ -4,6 +4,8 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 
 import { StatusBar, Splashscreen } from 'ionic-native';
 
+import { OT_GV, IGV } from './../globalVar/gv';
+
 import { OT_EN, IEN } from './../lang/en';
 import { OT_ZH, IZH } from './../lang/zh';
 
@@ -19,11 +21,15 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage: any = HelloIonicPage;
-  pages: Array<{title: string, icon: string, component: any}>;
+  pagesZH: Array<{title: string, icon: string, component: any}>;
+  pagesEN: Array<{title: string, icon: string, component: any}>;
+  langInd: String;
 
   constructor(
-    @Inject(OT_EN) private IEN: IEN,
+    @Inject(OT_GV) private IGV: IGV,
+    
     @Inject(OT_ZH) private IZH: IZH,
+    @Inject(OT_EN) private IEN: IEN,
     public platform: Platform,
     public menu: MenuController
   ) {
@@ -38,15 +44,22 @@ export class MyApp {
       Splashscreen.hide();
     });
 
-    this.IZH.HOME = 'KKKKKK';
+    this.langInd = this.IGV.gLangInd;
 
     // set our app's pages
-    this.pages = [
+    this.pagesZH = [
       { title: this.IZH.HOME, icon: 'home', component: HelloIonicPage },
       { title: this.IZH.NINE_DAY_WEATHER_FORECAST, icon: 'cloud', component: ListPage },
       { title: this.IZH.SETTING, icon: 'settings', component: HelloIonicPage },
       { title: this.IZH.ABOUT, icon: 'information-circle', component: HelloIonicPage },
       { title: this.IZH.FEEDBACK, icon: 'text', component: HelloIonicPage },
+    ];
+    this.pagesEN = [
+      { title: this.IEN.HOME, icon: 'home', component: HelloIonicPage },
+      { title: this.IEN.NINE_DAY_WEATHER_FORECAST, icon: 'cloud', component: ListPage },
+      { title: this.IEN.SETTING, icon: 'settings', component: HelloIonicPage },
+      { title: this.IEN.ABOUT, icon: 'information-circle', component: HelloIonicPage },
+      { title: this.IEN.FEEDBACK, icon: 'text', component: HelloIonicPage },
     ];
   }
 
@@ -56,4 +69,10 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
+
+  changeLangInd(lang) {
+        this.langInd = lang;
+        this.IGV.gLangInd = lang;
+        this.menu.close();
+    }
 }

@@ -8,9 +8,22 @@
 
   <ion-content class="applyBasicBgColor">
     <ion-list class="applyBasicBgColor">
-      <button class="applyBasicBgColor colorToWhite" ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-icon name="{{p.icon}}" item-left></ion-icon> {{p.title}}
+      <button class="applyBasicBgColor colorToWhite" ion-item (click)="changeLangInd('ZH')">
+        繁
       </button>
+      <button class="applyBasicBgColor colorToWhite" ion-item (click)="changeLangInd('EN')">
+        ENG
+      </button>
+      <div *ngIf="langInd === 'ZH'">
+        <button  class="applyBasicBgColor colorToWhite" ion-item *ngFor="let p of pagesZH" (click)="openPage(p)">
+          <ion-icon name="{{p.icon}}" item-left></ion-icon> {{p.title}}
+        </button>
+      </div>
+      <div *ngIf="langInd === 'EN'">
+        <button class="applyBasicBgColor colorToWhite" ion-item *ngFor="let p of pagesEN" (click)="openPage(p)">
+          <ion-icon name="{{p.icon}}" item-left></ion-icon> {{p.title}}
+        </button>
+     </div>
     </ion-list>
   </ion-content>
 
