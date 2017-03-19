@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
+import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { OT_GV, IGV } from './../globalVar/gv';
 import { OT_EN, IEN } from './../lang/en';
 import { OT_ZH, IZH } from './../lang/zh';
@@ -13,7 +14,8 @@ import { OT_ZH, IZH } from './../lang/zh';
     MyApp,
     HelloIonicPage,
     ItemDetailsPage,
-    ListPage
+    ListPage,
+    WeatherForecast
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +25,8 @@ import { OT_ZH, IZH } from './../lang/zh';
     MyApp,
     HelloIonicPage,
     ItemDetailsPage,
-    ListPage
+    ListPage,
+    WeatherForecast
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

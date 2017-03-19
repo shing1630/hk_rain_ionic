@@ -2,7 +2,16 @@
 
   <ion-header>
     <ion-toolbar>
-      <ion-title>HK Rain</ion-title>
+      <div *ngIf="langInd === 'ZH'">
+        <ion-title>
+          <img style="height: 50px;" src="https://na.cx/i/w57shwD.gif"> 香港雨
+        </ion-title>
+      </div> 
+      <div *ngIf="langInd === 'EN'">
+        <ion-title>
+          <img style="height: 50px;" src="https://na.cx/i/w57shwD.gif"> HK Rain
+        </ion-title>
+      </div> 
     </ion-toolbar>
   </ion-header>
 

@@ -11,6 +11,7 @@ import { OT_ZH, IZH } from './../lang/zh';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
+import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 
 
 @Component({
@@ -49,15 +50,15 @@ export class MyApp {
     // set our app's pages
     this.pagesZH = [
       { title: this.IZH.HOME, icon: 'home', component: HelloIonicPage },
-      { title: this.IZH.NINE_DAY_WEATHER_FORECAST, icon: 'cloud', component: ListPage },
-      { title: this.IZH.SETTING, icon: 'settings', component: HelloIonicPage },
+      { title: this.IZH.NINE_DAY_WEATHER_FORECAST, icon: 'cloud', component: WeatherForecast },
+      { title: this.IZH.SETTING, icon: 'settings', component: ListPage },
       { title: this.IZH.ABOUT, icon: 'information-circle', component: HelloIonicPage },
       { title: this.IZH.FEEDBACK, icon: 'text', component: HelloIonicPage },
     ];
     this.pagesEN = [
       { title: this.IEN.HOME, icon: 'home', component: HelloIonicPage },
-      { title: this.IEN.NINE_DAY_WEATHER_FORECAST, icon: 'cloud', component: ListPage },
-      { title: this.IEN.SETTING, icon: 'settings', component: HelloIonicPage },
+      { title: this.IEN.NINE_DAY_WEATHER_FORECAST, icon: 'cloud', component: WeatherForecast },
+      { title: this.IEN.SETTING, icon: 'settings', component: ListPage },
       { title: this.IEN.ABOUT, icon: 'information-circle', component: HelloIonicPage },
       { title: this.IEN.FEEDBACK, icon: 'text', component: HelloIonicPage },
     ];
