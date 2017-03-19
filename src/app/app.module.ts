@@ -1,4 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
+import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
@@ -6,8 +7,7 @@ import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { OT_GV, IGV } from './../globalVar/gv';
-import { OT_EN, IEN } from './../lang/en';
-import { OT_ZH, IZH } from './../lang/zh';
+import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,12 @@ import { OT_ZH, IZH } from './../lang/zh';
     WeatherForecast
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    TranslateModule.forRoot({
+      provide: TranslateLoader,
+      useFactory: (createTranslateLoader),
+      deps: [Http]
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,10 +34,13 @@ import { OT_ZH, IZH } from './../lang/zh';
     WeatherForecast
   ],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    {provide: OT_GV, useValue: IGV },
-    {provide: OT_EN, useValue: IEN },
-    {provide: OT_ZH, useValue: IZH },
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    { provide: OT_GV, useValue: IGV }
   ]
 })
-export class AppModule {}
+export class AppModule { }
+
+export function createTranslateLoader(http: Http) {
+    return new TranslateStaticLoader(http, 'assets/i18n', '.json');
+}
+

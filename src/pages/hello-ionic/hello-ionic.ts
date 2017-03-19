@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { OT_ZH, IZH } from './../../lang/zh';
 
 
 @Component({
@@ -7,8 +6,7 @@ import { OT_ZH, IZH } from './../../lang/zh';
   templateUrl: 'hello-ionic.html'
 })
 export class HelloIonicPage {
-  constructor(@Inject(OT_ZH) private IZH: IZH) {
+  constructor() {
     
-    console.log('ZH: '+this.IZH.HOME);
   }
 }
