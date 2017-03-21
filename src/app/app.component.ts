@@ -11,7 +11,9 @@ import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+   styleUrls: ['../assets/css/global.main.css'
+        , '../assets/css/fadeInDiv.css']
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -37,7 +39,8 @@ export class MyApp {
       Splashscreen.hide();
     });
     translate.setDefaultLang('zh');
-    this.langInd = this.IGV.gLangInd;
+    this.langInd = 'zh';
+    this.IGV.gLangInd = 'zh';
   }
 
   openPage(page) {
