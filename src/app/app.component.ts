@@ -11,9 +11,7 @@ import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 
 
 @Component({
-  templateUrl: 'app.html',
-   styleUrls: ['../assets/css/global.main.css'
-        , '../assets/css/fadeInDiv.css']
+  templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

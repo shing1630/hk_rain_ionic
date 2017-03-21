@@ -3,23 +3,51 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ 'AB.P1' | translate }}</ion-title>
+    <ion-title>{{'WF.9DAY_WEATHER_FORECAST' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid>
 
-  <h3>1</h3>
+    <ion-row>
+      <ion-col col-12>
+        <div class="mainComponent fade-in one">
+          <div class="paddingTo10">
+            <div class="form-group">
+              <p class="fontXXLarge"><strong>{{'WF.9DAY_WEATHER_FORECAST' | translate}}</strong></p>
+              <p class="fontXLarge colorToWarning"><strong>{{'WF.HKO_PROVIDED' | translate}}</strong></p>
+            </div>
+          </div>
+        </div>
+      </ion-col>
 
-  <p>
-    {{ 'CW.WILL_IT_RAIN' | translate }}
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
+    </ion-row>
+
+
+ <div *ngFor="let forecast of forecastList; let i=index">
+    <ion-row>
+     
+        <ion-col col-sm-12 col-md-6 col-lg-4>
+          <div class="subComponent fade-in " [ngClass]="{'two': [0,1,2].indexOf(i) > -1, 
+                    'three': [3,4,5].indexOf(i) > -1, 'four': [6,7,8].indexOf(i) > -1}" style="height: 200px;">
+            <div class="paddingTo10">
+              <p *ngIf="langInd === 'en'" class="fontLarge"><strong>{{forecast.day}} {{monthMap[forecast.month]}} ( {{weekDayEnMap[forecast.weekDay]}} ) </strong></p>
+              <p *ngIf="langInd === 'zh'" class="fontLarge"><strong>{{forecast.month}} {{'WF.MONTH' | translate}} {{forecast.day}} {{'WF.DAY' | translate}} ( {{weekDayZhMap[forecast.weekDay]}} )</strong></p>
+              <hr style="border-top: 3px solid #eee; margin-top: 0px;" />
+              <p class="fontLarge"><strong>{{forecast.temp}}</strong></p>
+              <p *ngIf="langInd === 'en'" class="fontLarge"><strong>{{forecast.desc_en}}</strong></p>
+              <p *ngIf="langInd === 'zh'" class="fontLarge"><strong>{{forecast.desc_zh}}</strong></p>
+            </div>
+          </div>
+        </ion-col>
+    
+    </ion-row>
+      </div>
+
+  </ion-grid>
+
+  <button id="langIndBtn" (click)="changeLangInd()" class="btn ToHidden"></button>
 
 </ion-content>
