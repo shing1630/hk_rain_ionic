@@ -18,7 +18,6 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage: any = HelloIonicPage;
-  langInd: String;
 
   constructor(
     @Inject(OT_GV) private IGV: IGV,
@@ -37,7 +36,6 @@ export class MyApp {
       Splashscreen.hide();
     });
     translate.setDefaultLang('zh');
-    this.langInd = 'zh';
     this.IGV.gLangInd = 'zh';
   }
 
@@ -69,7 +67,6 @@ export class MyApp {
 
   changeLangInd(lang) {
     this.translate.use(lang);
-    this.langInd = lang;
     this.IGV.gLangInd = lang;
     this.menu.close();
   }

@@ -12,8 +12,6 @@ import { ForecastService } from "../../services/forecast.service";
 export class WeatherForecast {
   forecastList: Forecast[] = [];
 
-  langInd: string;
-
   monthMap: {};
   weekDayEnMap: {};
   weekDayZhMap: {};
@@ -21,7 +19,6 @@ export class WeatherForecast {
   constructor(
     @Inject(OT_GV) private IGV: IGV,
     private forecastService: ForecastService) {
-    this.langInd = IGV.gLangInd;
     this.monthMap = IGV.monthMap;
     this.weekDayEnMap = IGV.weekDayEnMap;
     this.weekDayZhMap = IGV.weekDayZhMap;
@@ -40,4 +37,5 @@ export class WeatherForecast {
         }
       });
   }
+
 }
