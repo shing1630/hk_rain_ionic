@@ -3,7 +3,7 @@
  */
 
 import { Component, OnInit, style, animate, transition, trigger } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, AlertController } from 'ionic-angular';
 
 import { Weather } from "../../models/Weather";
 import { ResultWeather } from "../../models/ResultWeather";
@@ -67,7 +67,8 @@ export class CalculateWeather implements OnInit {
 
     constructor(
         @Inject(OT_GV) private IGV: IGV,
-        public loadingCtrl: LoadingController,
+        private loadingCtrl: LoadingController,
+        private alertCtrl: AlertController,
         private weatherService: WeatherService,
         private forecastService: ForecastService) {
 
@@ -163,6 +164,16 @@ export class CalculateWeather implements OnInit {
 
     }
 
+    // -------------  Alert -------------//
+    presentAlert(inputTitle: string, inputSubTitle: string) {
+        let alert = this.alertCtrl.create({
+            title: inputTitle,
+            subTitle: inputSubTitle,
+            buttons: ['OK']
+        });
+        alert.present();
+    }
+
     // ------------- Component Change -------------//
     yearChange() {
         this.selectedMonth = null;
@@ -256,7 +267,9 @@ export class CalculateWeather implements OnInit {
         this.loading.present();
 
         setTimeout(() => {
-           this.loading.dismiss();
+            this.loading.dismiss();
+
+            this.presentAlert('error', 'This is a error!');
         }, 5000);
 
         //check forecast Date
