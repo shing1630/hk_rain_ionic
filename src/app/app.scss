@@ -38,6 +38,12 @@ $basicColor: #007ACC;
   border-bottom: 0;
 }
 
+// Override loading
+.loading-md .loading-wrapper{
+  background: none !important;
+  box-shadow: none !important;
+}
+
 // **********************************************//
 // **************** FadeInDev *******************//
 // **********************************************//

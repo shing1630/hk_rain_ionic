@@ -17,19 +17,25 @@
                 </ion-select>
             </ion-item>
 
-             <ion-item>
+            <ion-item>
                 <ion-label>{{ 'CW.MONTH' | translate }}</ion-label>
                 <ion-select id="month" name="month" [(ngModel)]="selectedMonth" (ngModelChange)="monthChange()">
                     <ion-option *ngFor="let month of selectMonthList" value="{{month.value}}">{{month.label}}</ion-option>
                 </ion-select>
             </ion-item>
 
-             <ion-item>
+            <ion-item>
                 <ion-label>{{ 'CW.DAY' | translate }}</ion-label>
-                <ion-select id="day" name="day" [(ngModel)]="selectedDay"  (ngModelChange)="dayChange()" [disabled]="dayDisable">
+                <ion-select id="day" name="day" [(ngModel)]="selectedDay" [disabled]="dayDisable">
                     <ion-option *ngFor="let day of selectDayList" value="{{day.value}}">{{day.label}}</ion-option>
                 </ion-select>
             </ion-item>
+
+            <div class="centerAndMiddle">
+                <button ion-button type="submit" full color="secondary" [disabled]="selectedYear == null || selectedMonth == null || selectedDay == null">
+                    {{ 'CW.GO' | translate }}
+                </button>
+            </div>
 
         </ion-list>
     </form>
