@@ -7,6 +7,7 @@ export interface IGV {
     monthMap: {};
     weekDayEnMap: {};
     weekDayZhMap: {};
+    filterYear: number;
 }
 
 export const IGV: IGV = {
@@ -22,7 +23,8 @@ export const IGV: IGV = {
     weekDayZhMap: {
         0: '日', 1: '一', 2: '二', 3: '三',
         4: '四', 5: '五', 6: '六'
-    }
+    },
+    filterYear: 25
 
 };
 

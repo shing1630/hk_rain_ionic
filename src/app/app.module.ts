@@ -6,7 +6,9 @@ import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
+import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { ForecastService } from '../services/forecast.service';
+import { WeatherService } from '../services/weather.service';
 import { OT_GV, IGV } from './../globalVar/gv';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
@@ -16,7 +18,8 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     HelloIonicPage,
     ItemDetailsPage,
     ListPage,
-    WeatherForecast
+    WeatherForecast,
+    CalculateWeather
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -32,12 +35,14 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     HelloIonicPage,
     ItemDetailsPage,
     ListPage,
-    WeatherForecast
+    WeatherForecast,
+    CalculateWeather
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: OT_GV, useValue: IGV },
-    ForecastService
+    ForecastService,
+    WeatherService
   ]
 })
 export class AppModule { }

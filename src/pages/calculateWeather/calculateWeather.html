@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        <ion-title>{{ 'CW.WILL_IT_RAIN' | translate }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <form id="calInputForm" *ngIf="!showResult && !showForecast" class="form-horizontal" (ngSubmit)="calWeather()">
+        <ion-list>
+            <ion-item>
+                <ion-label>{{ 'CW.YEAR' | translate }}</ion-label>
+                <ion-select id="year" name="year" [(ngModel)]="selectedYear" (ngModelChange)="yearChange()">
+                    <ion-option *ngFor="let year of selectYearList" value="{{year.value}}">{{year.label}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+             <ion-item>
+                <ion-label>{{ 'CW.MONTH' | translate }}</ion-label>
+                <ion-select id="month" name="month" [(ngModel)]="selectedMonth" (ngModelChange)="monthChange()">
+                    <ion-option *ngFor="let month of selectMonthList" value="{{month.value}}">{{month.label}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+             <ion-item>
+                <ion-label>{{ 'CW.DAY' | translate }}</ion-label>
+                <ion-select id="day" name="day" [(ngModel)]="selectedDay"  (ngModelChange)="dayChange()" [disabled]="dayDisable">
+                    <ion-option *ngFor="let day of selectDayList" value="{{day.value}}">{{day.label}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+        </ion-list>
+    </form>
+</ion-content>

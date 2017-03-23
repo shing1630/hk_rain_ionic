@@ -8,6 +8,7 @@ import { OT_GV, IGV } from './../globalVar/gv';
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
+import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 
 
 @Component({
@@ -51,6 +52,10 @@ export class MyApp {
       }
       case 'WeatherForecast': {
         toPage = WeatherForecast;
+        break;
+      }
+      case 'CalculateWeather': {
+        toPage = CalculateWeather;
         break;
       }
       case 'ListPage': {
