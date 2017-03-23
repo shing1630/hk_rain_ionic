@@ -6,14 +6,14 @@ import { Injectable } from '@angular/core';
 
 
 import { Weather } from "../models/Weather";
-import { Headers, Http, Response } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { ResultWeather } from "../models/ResultWeather";
 
 @Injectable()
 export class WeatherService {
 
-    private baserUrl = 'api/';  // URL to web api
+    private baserUrl = 'http://www.hkrain.com/api';  // URL to web api
 
     constructor(private http: Http) { }
 

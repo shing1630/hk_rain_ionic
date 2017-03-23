@@ -2,7 +2,7 @@
  * Created by Josh Chan on 02-12-2016.
  */
 
-import { Component, OnInit, style, animate, transition, trigger } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
 
 import { Weather } from "../../models/Weather";
@@ -72,14 +72,6 @@ export class CalculateWeather implements OnInit {
         private weatherService: WeatherService,
         private forecastService: ForecastService) {
 
-        this.loading = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: `
-                <div class="centerAndMiddle">
-                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
-                </div>`,
-        });
-
         this.monthMap = IGV.monthMap;
         this.weekDayEnMap = IGV.weekDayEnMap;
         this.weekDayZhMap = IGV.weekDayZhMap;
@@ -87,6 +79,21 @@ export class CalculateWeather implements OnInit {
         // Set filter year from gloalVar
         this.selectedFilterYear = IGV.filterYear;
 
+    }
+
+    loadingPresent(){
+         this.loading = this.loadingCtrl.create({
+            spinner: 'hide',
+            content: `
+                <div class="centerAndMiddle">
+                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
+                </div>`,
+        });
+        this.loading.present();
+    }
+
+    loadingDismiss(){
+         this.loading.dismiss();
     }
 
     resetForm1() {
@@ -165,6 +172,14 @@ export class CalculateWeather implements OnInit {
     }
 
     // -------------  Alert -------------//
+     presentSysErr() {
+        let alert = this.alertCtrl.create({
+            title: '錯誤! ERROR!',
+            subTitle: '抱歉，出了一些問題... Sorry, something went wrong...',
+            buttons: ['OK']
+        });
+        alert.present();
+    }
     presentAlert(inputTitle: string, inputSubTitle: string) {
         let alert = this.alertCtrl.create({
             title: inputTitle,
@@ -262,15 +277,10 @@ export class CalculateWeather implements OnInit {
         return new Date(year, month, 0).getDate();
     }
 
+
     calWeather() {
 
-        this.loading.present();
-
-        setTimeout(() => {
-            this.loading.dismiss();
-
-            this.presentAlert('error', 'This is a error!');
-        }, 5000);
+        this.loadingPresent();
 
         //check forecast Date
         let isForecast: boolean = false;
@@ -291,34 +301,35 @@ export class CalculateWeather implements OnInit {
         let weekDay = Number(new Date(Number(this.selectedYear),
             Number(this.selectedMonth) - 1, Number(this.selectedDay)).getDay());
 
-        // if (isForecast) {
-        //     this.showResult = false;
-        //     this.forecastService.getSingleForecast(Number(this.selectedMonth), Number(this.selectedDay))
-        //         .then(forecast => {
-        //             this.forecast = forecast;
-        //             this.forecast.weekDay = weekDay;
-        //             this.showForecast = true;
-        //         }).catch(error => {this.msgs.push({ severity: 'error', summary: 'Error: ', detail: 'Something went wrong...' });});
-        // } else {
-        //     this.showForecast = false;
-        //     // calculate weather
-        //     this.weatherService
-        //         .getCalWeather(this.selectedYear, this.selectedMonth, this.selectedDay, this.selectedFilterYear)
-        //         .then(result => {
-        //             this.weatherResult = result;
-        //             this.weatherIconPath = this.getCalWeatherIconPath(this.weatherResult);
-        //             this.maxRainValue = Math.max(Number(this.weatherResult.drizzle), Number(this.weatherResult.light)),
-        //                 Number(this.weatherResult.moderate), Number(this.weatherResult.heavy),
-        //                 Number(this.weatherResult.violent), Number(this.weatherResult.torrential);
+        if (isForecast) {
+            this.showResult = false;
+            this.forecastService.getSingleForecast(Number(this.selectedMonth), Number(this.selectedDay))
+                .then(forecast => {
+                    this.forecast = forecast;
+                    this.forecast.weekDay = weekDay;
+                    this.showForecast = true;
+                    this.loadingDismiss();
+                }).catch(error => {this.presentSysErr();  this.loadingDismiss();});
+        } else {
+            // this.showForecast = false;
+            // // calculate weather
+            // this.weatherService
+            //     .getCalWeather(this.selectedYear, this.selectedMonth, this.selectedDay, this.selectedFilterYear)
+            //     .then(result => {
+            //         this.weatherResult = result;
+            //         this.weatherIconPath = this.getCalWeatherIconPath(this.weatherResult);
+            //         this.maxRainValue = Math.max(Number(this.weatherResult.drizzle), Number(this.weatherResult.light)),
+            //             Number(this.weatherResult.moderate), Number(this.weatherResult.heavy),
+            //             Number(this.weatherResult.violent), Number(this.weatherResult.torrential);
 
-        //             this.weatherResult.weekDay = weekDay;
-        //             this.showResult = true;
-        //         })
-        //         .catch(error => {
-        //             this.error = error;
-        //             console.log('error: ' + this.error);
-        //         }); // TODO: Display error message
-        // }
+            //         this.weatherResult.weekDay = weekDay;
+            //         this.showResult = true;
+            //     })
+            //     .catch(error => {
+            //         this.error = error;
+            //         console.log('error: ' + this.error);
+            //     }); // TODO: Display error message
+        }
     }
     calWeather2() {
 

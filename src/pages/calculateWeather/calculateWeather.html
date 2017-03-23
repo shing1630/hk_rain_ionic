@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-    <form id="calInputForm" *ngIf="!showResult && !showForecast" class="form-horizontal" (ngSubmit)="calWeather()">
+    <form id="calInputForm" *ngIf="!showResult && !showForecast">
         <ion-list>
             <ion-item>
                 <ion-label>{{ 'CW.YEAR' | translate }}</ion-label>
@@ -32,11 +32,47 @@
             </ion-item>
 
             <div class="centerAndMiddle">
-                <button ion-button type="submit" full color="secondary" [disabled]="selectedYear == null || selectedMonth == null || selectedDay == null">
+                <button ion-button type="button" full color="secondary" (click)="calWeather();" [disabled]="selectedYear == null || selectedMonth == null || selectedDay == null">
                     {{ 'CW.GO' | translate }}
                 </button>
             </div>
 
         </ion-list>
+    </form>
+
+    <form id="calResultForm" *ngIf="showForecast">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-12>
+                    <div class="mainComponent fade-in one">
+                        <div class="paddingTo10">
+                            <div class="form-group">
+                                <p class="fontLarge colorToWarning"><strong>{{'CW.FORECASR_EXPLAIN' | translate}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-sm-12 col-md-6 col-lg-4>
+                    <div class="subComponent fade-in two" style="height: 200px;">
+                        <div class="paddingTo10">
+                            <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast.day}} {{monthMap[forecast.month]}} ( {{weekDayEnMap[forecast.weekDay]}} ) </strong></p>
+                            <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast.month}} {{'CW.MONTH' | translate}} {{forecast.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[forecast.weekDay]}} )</strong></p>
+                            <hr style="border-top: 3px solid #eee; margin-top: 0px;" />
+                            <p class="fontLarge"><strong>{{forecast.temp}}</strong></p>
+                            <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast.desc_en}}</strong></p>
+                            <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast.desc_zh}}</strong></p>
+                            
+                        </div>
+                    </div>
+                    <div class="centerAndMiddle subComponent fade-in three">
+                        <button ion-button type="button" full color="secondary" (click)="fromForecastToCal();">
+                            {{ 'CW.BACK' | translate }}
+                        </button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </form>
 </ion-content>

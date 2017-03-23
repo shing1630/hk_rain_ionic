@@ -39,7 +39,7 @@ $basicColor: #007ACC;
 }
 
 // Override loading
-.loading-md .loading-wrapper{
+.loading-md .loading-wrapper, .loading-ios .loading-wrapper, .loading-wp .loading-wrapper{
   background: none !important;
   box-shadow: none !important;
 }
