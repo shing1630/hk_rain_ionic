@@ -5,7 +5,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { OT_GV, IGV } from './../globalVar/gv';
 
-import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ListPage } from '../pages/list/list';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
@@ -17,8 +16,8 @@ import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  // make HelloIonicPage the root (or first) page
-  rootPage: any = HelloIonicPage;
+  // make CalculateWeather the root (or first) page
+  rootPage: any = CalculateWeather;
 
   constructor(
     @Inject(OT_GV) private IGV: IGV,
@@ -46,10 +45,6 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     let toPage: any;
     switch (page) {
-      case 'HelloIonicPage': {
-        toPage = HelloIonicPage;
-        break;
-      }
       case 'WeatherForecast': {
         toPage = WeatherForecast;
         break;
@@ -63,7 +58,7 @@ export class MyApp {
         break;
       }
       default: {
-        toPage = HelloIonicPage;
+        toPage = CalculateWeather;
         break;
       }
     }
