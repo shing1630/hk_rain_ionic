@@ -26,8 +26,8 @@
     </ion-row>
 
 
- <div *ngFor="let forecast of forecastList; let i=index">
-    <ion-row>
+    <div *ngFor="let forecast of forecastList; let i=index">
+      <ion-row>
         <ion-col col-sm-12 col-md-6 col-lg-4>
           <div class="subComponent fade-in " [ngClass]="{'two': [0,1,2].indexOf(i) > -1, 
                     'three': [3,4,5].indexOf(i) > -1, 'four': [6,7,8].indexOf(i) > -1}" style="height: 200px;">
@@ -41,9 +41,9 @@
             </div>
           </div>
         </ion-col>
-    
-    </ion-row>
-      </div>
+
+      </ion-row>
+    </div>
 
   </ion-grid>
 
