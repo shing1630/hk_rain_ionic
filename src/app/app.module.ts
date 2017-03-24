@@ -2,8 +2,6 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { Http } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { ItemDetailsPage } from '../pages/item-details/item-details';
-import { ListPage } from '../pages/list/list';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { Setting } from '../pages/setting/setting';
@@ -15,8 +13,6 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 @NgModule({
   declarations: [
     MyApp,
-    ItemDetailsPage,
-    ListPage,
     WeatherForecast,
     CalculateWeather,
     Setting
@@ -32,8 +28,6 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ItemDetailsPage,
-    ListPage,
     WeatherForecast,
     CalculateWeather,
     Setting

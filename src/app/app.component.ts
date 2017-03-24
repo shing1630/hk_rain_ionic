@@ -5,7 +5,6 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { OT_GV, IGV } from './../globalVar/gv';
 
-import { ListPage } from '../pages/list/list';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { Setting } from '../pages/setting/setting';
@@ -87,10 +86,6 @@ export class MyApp {
       }
       case 'Setting': {
         toPage = Setting;
-        break;
-      }
-      case 'ListPage': {
-        toPage = ListPage;
         break;
       }
       default: {
