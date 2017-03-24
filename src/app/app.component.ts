@@ -8,6 +8,7 @@ import { OT_GV, IGV } from './../globalVar/gv';
 import { ListPage } from '../pages/list/list';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
+import { Setting } from '../pages/setting/setting';
 
 
 @Component({
@@ -82,6 +83,10 @@ export class MyApp {
       }
       case 'CalculateWeather': {
         toPage = CalculateWeather;
+        break;
+      }
+      case 'Setting': {
+        toPage = Setting;
         break;
       }
       case 'ListPage': {
