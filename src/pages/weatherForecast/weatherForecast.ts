@@ -1,4 +1,6 @@
 import { Component, Inject } from '@angular/core';
+import { LoadingController, AlertController } from 'ionic-angular';
+
 import { OT_GV, IGV } from './../../globalVar/gv';
 
 import { Forecast } from "../../models/Forecast";
@@ -16,15 +18,45 @@ export class WeatherForecast {
   weekDayEnMap: {};
   weekDayZhMap: {};
 
+  loading: any;
+
   constructor(
     @Inject(OT_GV) private IGV: IGV,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     private forecastService: ForecastService) {
     this.monthMap = IGV.monthMap;
     this.weekDayEnMap = IGV.weekDayEnMap;
     this.weekDayZhMap = IGV.weekDayZhMap;
   }
 
+  loadingPresent() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `
+                <div class="centerAndMiddle">
+                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
+                </div>`,
+    });
+    this.loading.present();
+  }
+
+  loadingDismiss() {
+    this.loading.dismiss();
+  }
+
+  // -------------  Alert -------------//
+  presentSysErr() {
+    let alert = this.alertCtrl.create({
+      title: '錯誤! ERROR!',
+      subTitle: '抱歉，出了一些問題... Sorry, something went wrong...',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
   ngOnInit() {
+    this.loadingPresent();
     this.forecastService.getForecast()
       .then(forecastList => {
         this.forecastList = forecastList;
@@ -35,7 +67,8 @@ export class WeatherForecast {
             this.forecastList[key].weekDay = Number(currDate.getDay());
           }
         }
-      });
+        this.loadingDismiss();
+      }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
   }
 
 }
