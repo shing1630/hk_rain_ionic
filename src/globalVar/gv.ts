@@ -58,7 +58,7 @@ export const IGV: IGV = {
         0: '日', 1: '一', 2: '二', 3: '三',
         4: '四', 5: '五', 6: '六'
     },
-    filterYear: 25,
+    filterYear: 45,
     NEW: 'new',
     RAIN_SUN_THRESHOLD: 50,
     SUNSHINE: 'sunshine',
