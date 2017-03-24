@@ -1,7 +1,3 @@
-/**
- * Created by Josh Chan on 02-12-2016.
- */
-
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
 
@@ -311,24 +307,22 @@ export class CalculateWeather implements OnInit {
                     this.loadingDismiss();
                 }).catch(error => {this.presentSysErr();  this.loadingDismiss();});
         } else {
-            // this.showForecast = false;
-            // // calculate weather
-            // this.weatherService
-            //     .getCalWeather(this.selectedYear, this.selectedMonth, this.selectedDay, this.selectedFilterYear)
-            //     .then(result => {
-            //         this.weatherResult = result;
-            //         this.weatherIconPath = this.getCalWeatherIconPath(this.weatherResult);
-            //         this.maxRainValue = Math.max(Number(this.weatherResult.drizzle), Number(this.weatherResult.light)),
-            //             Number(this.weatherResult.moderate), Number(this.weatherResult.heavy),
-            //             Number(this.weatherResult.violent), Number(this.weatherResult.torrential);
+            this.showForecast = false;
+            // calculate weather
+            this.weatherService
+                .getCalWeather(this.selectedYear, this.selectedMonth, this.selectedDay, this.selectedFilterYear)
+                .then(result => {
+                    this.weatherResult = result;
+                    console.log('restt: '+result);
+                    this.weatherIconPath = this.getCalWeatherIconPath(this.weatherResult);
+                    this.maxRainValue = Math.max(Number(this.weatherResult.drizzle), Number(this.weatherResult.light)),
+                        Number(this.weatherResult.moderate), Number(this.weatherResult.heavy),
+                        Number(this.weatherResult.violent), Number(this.weatherResult.torrential);
 
-            //         this.weatherResult.weekDay = weekDay;
-            //         this.showResult = true;
-            //     })
-            //     .catch(error => {
-            //         this.error = error;
-            //         console.log('error: ' + this.error);
-            //     }); // TODO: Display error message
+                    this.weatherResult.weekDay = weekDay;
+                    this.showResult = true;
+                    this.loadingDismiss();
+                }).catch(error => {this.presentSysErr();  this.loadingDismiss();});
         }
     }
     calWeather2() {
@@ -441,21 +435,21 @@ export class CalculateWeather implements OnInit {
     getCalWeatherIconPath(weatherResult: ResultWeather) {
         let iconPath: string = null;
 
-        // if (weatherResult.rainYear < this.GCONSTANTS.RAIN_SUN_THRESHOLD) {
-        //     iconPath = './app/assets/img/icon/' + this.GCONSTANTS.SUNSHINE + '.png';
-        // } else {
-        //     if (this.isTorrential(weatherResult) || this.isViolent(weatherResult)) {
-        //         iconPath = './app/assets/img/icon/' + this.GCONSTANTS.VIOLENT_TORRENTIAL + '.png';
-        //     } else if (this.isHeavy(weatherResult)) {
-        //         iconPath = './app/assets/img/icon/' + this.GCONSTANTS.HEAVY + '.png';
-        //     } else if (this.isModerate(weatherResult)) {
-        //         iconPath = './app/assets/img/icon/' + this.GCONSTANTS.MODERATE + '.png';
-        //     } else if (this.isLigth(weatherResult)) {
-        //         iconPath = './app/assets/img/icon/' + this.GCONSTANTS.LIGHT + '.png';
-        //     } else if (this.isDrizzle(weatherResult)) {
-        //         iconPath = './app/assets/img/icon/' + this.GCONSTANTS.DRIZZLE + '.png';
-        //     }
-        // }
+        if (weatherResult.rainYear < this.IGV.RAIN_SUN_THRESHOLD) {
+            iconPath = 'assets/img/icon/' + this.IGV.SUNSHINE + '.png';
+        } else {
+            if (this.isTorrential(weatherResult) || this.isViolent(weatherResult)) {
+                iconPath = 'assets/img/icon/' + this.IGV.VIOLENT_TORRENTIAL + '.png';
+            } else if (this.isHeavy(weatherResult)) {
+                iconPath = 'assets/img/icon/' + this.IGV.HEAVY + '.png';
+            } else if (this.isModerate(weatherResult)) {
+                iconPath = 'assets/img/icon/' + this.IGV.MODERATE + '.png';
+            } else if (this.isLigth(weatherResult)) {
+                iconPath = 'assets/img/icon/' + this.IGV.LIGHT + '.png';
+            } else if (this.isDrizzle(weatherResult)) {
+                iconPath = 'assets/img/icon/' + this.IGV.DRIZZLE + '.png';
+            }
+        }
         return iconPath;
     }
 
@@ -531,54 +525,48 @@ export class CalculateWeather implements OnInit {
         }
     }
 
-    fromResultToCal() {
+    backToCal() {
         this.showResult = false;
+        this.showForecast = false;
     }
     fromResultToCal2() {
         this.showResult2 = false;
     }
 
-    fromForecastToCal() {
-        this.showForecast = false;
-    }
-    fromForecastToCal2() {
-        this.showForecast2 = false;
-    }
-
     getRainfallDescEN(rainfall: number) {
-        // if(rainfall === 0){
-        //     return this.GCONSTANTS.SUNSHINE_EN;
-        // }else if(rainfall === this.GCONSTANTS.DRIZZLE_THRESHOLD){
-        //     return this.GCONSTANTS.DRIZZLE_EN;
-        // }else if(rainfall <= this.GCONSTANTS.LIGHT_THRESHOLD){
-        //     return this.GCONSTANTS.LIGHT_EN;
-        // }else if(rainfall <= this.GCONSTANTS.MODERATE_THRESHOLD){
-        //     return this.GCONSTANTS.MODERATE_EN;
-        // }else if(rainfall <= this.GCONSTANTS.HEAVY_THRESHOLD){
-        //     return this.GCONSTANTS.HEAVY_EN;
-        // }else if(rainfall <= this.GCONSTANTS.VIOLENT_THRESHOLD){
-        //     return this.GCONSTANTS.VIOLENT_EN;
-        // }else if(rainfall >= this.GCONSTANTS.TORRENTIAL_THRESHOLD){
-        //     return this.GCONSTANTS.TORRENTIAL_EN;
-        // }
+        if(rainfall === 0){
+            return this.IGV.SUNSHINE_EN;
+        }else if(rainfall === this.IGV.DRIZZLE_THRESHOLD){
+            return this.IGV.DRIZZLE_EN;
+        }else if(rainfall <= this.IGV.LIGHT_THRESHOLD){
+            return this.IGV.LIGHT_EN;
+        }else if(rainfall <= this.IGV.MODERATE_THRESHOLD){
+            return this.IGV.MODERATE_EN;
+        }else if(rainfall <= this.IGV.HEAVY_THRESHOLD){
+            return this.IGV.HEAVY_EN;
+        }else if(rainfall <= this.IGV.VIOLENT_THRESHOLD){
+            return this.IGV.VIOLENT_EN;
+        }else if(rainfall >= this.IGV.TORRENTIAL_THRESHOLD){
+            return this.IGV.TORRENTIAL_EN;
+        }
     }
 
     getRainfallDescZH(rainfall: number) {
-        // if(rainfall === 0){
-        //     return this.GCONSTANTS.SUNSHINE_ZH;
-        // }else if(rainfall === this.GCONSTANTS.DRIZZLE_THRESHOLD){
-        //     return this.GCONSTANTS.DRIZZLE_ZH;
-        // }else if(rainfall <= this.GCONSTANTS.LIGHT_THRESHOLD){
-        //     return this.GCONSTANTS.LIGHT_ZH;
-        // }else if(rainfall <= this.GCONSTANTS.MODERATE_THRESHOLD){
-        //     return this.GCONSTANTS.MODERATE_ZH;
-        // }else if(rainfall <= this.GCONSTANTS.HEAVY_THRESHOLD){
-        //     return this.GCONSTANTS.HEAVY_ZH;
-        // }else if(rainfall <= this.GCONSTANTS.VIOLENT_THRESHOLD){
-        //     return this.GCONSTANTS.VIOLENT_ZH;
-        // }else if(rainfall >= this.GCONSTANTS.TORRENTIAL_THRESHOLD){
-        //     return this.GCONSTANTS.TORRENTIAL_ZH;
-        // }
+        if(rainfall === 0){
+            return this.IGV.SUNSHINE_ZH;
+        }else if(rainfall === this.IGV.DRIZZLE_THRESHOLD){
+            return this.IGV.DRIZZLE_ZH;
+        }else if(rainfall <= this.IGV.LIGHT_THRESHOLD){
+            return this.IGV.LIGHT_ZH;
+        }else if(rainfall <= this.IGV.MODERATE_THRESHOLD){
+            return this.IGV.MODERATE_ZH;
+        }else if(rainfall <= this.IGV.HEAVY_THRESHOLD){
+            return this.IGV.HEAVY_ZH;
+        }else if(rainfall <= this.IGV.VIOLENT_THRESHOLD){
+            return this.IGV.VIOLENT_ZH;
+        }else if(rainfall >= this.IGV.TORRENTIAL_THRESHOLD){
+            return this.IGV.TORRENTIAL_ZH;
+        }
     }
 
 }

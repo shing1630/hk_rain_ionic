@@ -1,5 +1,5 @@
 import { Component, ViewChild, Inject } from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav, LoadingController, AlertController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
@@ -19,8 +19,12 @@ export class MyApp {
   // make CalculateWeather the root (or first) page
   rootPage: any = CalculateWeather;
 
+  loading: any;
+
   constructor(
     @Inject(OT_GV) private IGV: IGV,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
     public platform: Platform,
     public menu: MenuController,
     public translate: TranslateService
@@ -28,12 +32,39 @@ export class MyApp {
     this.initializeApp(translate);
   }
 
+  loadingPresent() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `
+                <div class="centerAndMiddle">
+                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
+                </div>`,
+    });
+    this.loading.present();
+  }
+
+  loadingDismiss() {
+    this.loading.dismiss();
+  }
+
+  // -------------  Alert -------------//
+  presentSysErr() {
+    let alert = this.alertCtrl.create({
+      title: '錯誤! ERROR!',
+      subTitle: '抱歉，出了一些問題... Sorry, something went wrong...',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
   initializeApp(translate) {
+    this.loadingPresent();
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+      this.loadingDismiss();
     });
     translate.setDefaultLang('zh');
     this.IGV.gLangInd = 'zh';

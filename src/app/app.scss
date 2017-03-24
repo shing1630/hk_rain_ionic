@@ -44,6 +44,11 @@ $basicColor: #007ACC;
   box-shadow: none !important;
 }
 
+// Override ion-co
+ion-col {
+  padding-top: 0px;
+}
+
 // **********************************************//
 // **************** FadeInDev *******************//
 // **********************************************//
@@ -217,19 +222,30 @@ a:hover, a:active, a:focus {
 
 .fontXXLarge{
 	font-size: xx-large;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .fontXLarge{
 	font-size: x-large;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .fontLarge{
 	font-size: large;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .fontMiddle{
 	font-size: middle;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
+
+
+   
 
 .noBorderRadius{
 	border-radius: 0px;
