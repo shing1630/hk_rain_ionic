@@ -18,6 +18,8 @@ export class Setting {
     @Inject(OT_GV) private IGV: IGV,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController) {
+
+    this.loadingPresent();
     // Set filter year from gloalVar
     this.selectedFilterYear = this.IGV.filterYear;
 
@@ -26,6 +28,8 @@ export class Setting {
       let year = { value: i, label: i };
       this.selectFilterYearList.push(year);
     }
+
+    this.loadingDismiss();
   }
 
   loadingPresent() {
@@ -53,21 +57,21 @@ export class Setting {
     alert.present();
   }
   presentAlert(inputTitle: string, inputSubTitle: string) {
-        let alert = this.alertCtrl.create({
-            title: inputTitle,
-            subTitle: inputSubTitle,
-            buttons: ['OK']
-        });
-        alert.present();
-    }
+    let alert = this.alertCtrl.create({
+      title: inputTitle,
+      subTitle: inputSubTitle,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 
   changeFilterYear() {
-         this.IGV.filterYear = this.selectedFilterYear;
-        if( this.IGV.gLangInd === 'en'){
-          this.presentAlert( this.IGV.SUBMITTED_SUCCESSFULLY_EN, this.IGV.NO_OF_YEARS_CHANGED_TO_EN + this.selectedFilterYear);
-        }else{
-            this.presentAlert( this.IGV.SUBMITTED_SUCCESSFULLY_ZH, this.IGV.NO_OF_YEARS_CHANGED_TO_ZH + this.selectedFilterYear);
-        }
+    this.IGV.filterYear = this.selectedFilterYear;
+    if (this.IGV.gLangInd === 'en') {
+      this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_EN, this.IGV.NO_OF_YEARS_CHANGED_TO_EN + this.selectedFilterYear);
+    } else {
+      this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_ZH, this.IGV.NO_OF_YEARS_CHANGED_TO_ZH + this.selectedFilterYear);
     }
+  }
 
 }

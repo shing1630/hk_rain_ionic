@@ -375,11 +375,11 @@ export class CalculateWeather implements OnInit {
 
     toggleMore() {
         this.getWeatherDtlList1();
-        this.showDtl = !this.showDtl;
+
     }
     toggleMore2() {
         this.getWeatherDtlList2();
-        this.showDtl2 = !this.showDtl2;
+
     }
 
     getWeatherDtlList1() {
@@ -398,6 +398,7 @@ export class CalculateWeather implements OnInit {
                         result[key].rainfallDescZH = this.getRainfallDescZH(result[key].rainfall);
                     }
                 }
+                this.showDtl = !this.showDtl;
                 this.weatherDtlList = result;
                 this.loadingDismiss();
             })
@@ -420,6 +421,7 @@ export class CalculateWeather implements OnInit {
                     }
                 }
                 this.weatherDtlList2 = result;
+                this.showDtl2 = !this.showDtl2;
             })
             .catch(error => {
                 console.log('error2: ' + this.error2);

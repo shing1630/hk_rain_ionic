@@ -6,8 +6,10 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { OT_GV, IGV } from './../globalVar/gv';
 
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
+import { RptFeedback } from '../pages/rptFeedback/rptFeedback';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { Setting } from '../pages/setting/setting';
+import { About } from '../pages/about/about';
 
 
 @Component({
@@ -86,6 +88,14 @@ export class MyApp {
       }
       case 'Setting': {
         toPage = Setting;
+        break;
+      }
+      case 'About': {
+        toPage = About;
+        break;
+      }
+      case 'RptFeedback': {
+        toPage = RptFeedback;
         break;
       }
       default: {

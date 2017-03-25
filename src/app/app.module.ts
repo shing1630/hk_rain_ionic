@@ -5,8 +5,11 @@ import { MyApp } from './app.component';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { Setting } from '../pages/setting/setting';
+import { About } from '../pages/about/about';
+import { RptFeedback } from '../pages/rptFeedback/rptFeedback';
 import { ForecastService } from '../services/forecast.service';
 import { WeatherService } from '../services/weather.service';
+import { FeedbackService } from '../services/feedback.service';
 import { OT_GV, IGV } from './../globalVar/gv';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
@@ -15,7 +18,9 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     MyApp,
     WeatherForecast,
     CalculateWeather,
-    Setting
+    Setting,
+    About,
+    RptFeedback
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -30,13 +35,16 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     MyApp,
     WeatherForecast,
     CalculateWeather,
-    Setting
+    Setting,
+    About,
+    RptFeedback
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     { provide: OT_GV, useValue: IGV },
     ForecastService,
-    WeatherService
+    WeatherService,
+    FeedbackService
   ]
 })
 export class AppModule { }
