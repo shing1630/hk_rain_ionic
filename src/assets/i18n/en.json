@@ -13,10 +13,10 @@
     "FEEDBACK": "Feedback"
   },  
   "AB": {
-    "P1": "Want to know will it rain in the next month/next year for holding some outdoor activities?",
-    "P2": "No problem! We predict the weather in the future!",
-    "P3": "We analysis the past weather data (from 1900) from Hong Kong Observatory and calculate a prediction of rain, temperature and humidity.",
-	  "P4": "The prediction can help you to decide the activity date and avoid the raining. Don’t hesitate to try it out right now!"
+    "P1": "Planning for an outdoor activity but worry about the weather? Do you want to know the possibility of rain on a particular day?",
+    "P2": "No problem! Our app can provide you reference information and prediction of rain, temperature and humidity in the future two years by analyzing the past weather data from Hong Kong Observatory since 1900.",
+    "P3": "The prediction help you decide the outdoor activity date and avoid the rain. Try it out right now!",
+	  "P4": "(The prediction is for reference only)"
   },
   "CW": {
     "WILL_IT_RAIN": "Will It Rain?",
