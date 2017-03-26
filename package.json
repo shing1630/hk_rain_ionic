@@ -41,5 +41,5 @@
     "ionic-plugin-keyboard"
   ],
   "cordovaPlatforms": [],
-  "description": "hk_rain_ionic: An Ionic project"
+  "description": "hk_rain_ionic: An weather project"
 }
