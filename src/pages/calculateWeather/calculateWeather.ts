@@ -342,8 +342,8 @@ export class CalculateWeather implements OnInit {
         }
 
         // calculate week day
-        let weekDay2 = Number(new Date(Number(this.selectedYear2),
-            Number(this.selectedMonth2) - 1, Number(this.selectedDay2)).getDay());
+        // let weekDay2 = Number(new Date(Number(this.selectedYear2),
+        //     Number(this.selectedMonth2) - 1, Number(this.selectedDay2)).getDay());
 
         // if (isForecast2) {
         //     this.showResult2 = false;
