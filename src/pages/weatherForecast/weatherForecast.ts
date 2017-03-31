@@ -63,8 +63,13 @@ export class WeatherForecast {
         for (var key in this.forecastList) {
           if (this.forecastList.hasOwnProperty(key)) {
             let currDate: Date = new Date();
-            currDate.setDate(currDate.getDate() + Number(key));
-            this.forecastList[key].weekDay = Number(currDate.getDay());
+             if(currDate.getDate() === this.forecastList[0].day){
+                  currDate.setDate(currDate.getDate() + Number(key));
+                  this.forecastList[key].weekDay = Number(currDate.getDay());
+              }else{
+                  currDate.setDate(currDate.getDate() + Number(key) + 1);
+                  this.forecastList[key].weekDay = Number(currDate.getDay());
+              }
           }
         }
         this.loadingDismiss();

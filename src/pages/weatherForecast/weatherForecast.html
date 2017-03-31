@@ -31,7 +31,6 @@
             <div class="centerAndMiddle paddingTo10">
               <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast.day}} {{monthMap[forecast.month]}} ( {{weekDayEnMap[forecast.weekDay]}} ) </strong></p>
               <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast.month}} {{'WF.MONTH' | translate}} {{forecast.day}} {{'WF.DAY' | translate}} ( {{weekDayZhMap[forecast.weekDay]}} )</strong></p>
-              <hr style="border-top: 3px solid #eee; margin-top: 0px;" />
               <p class="fontLarge"><strong>{{forecast.temp}}</strong></p>
               <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast.desc_en}}</strong></p>
               <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast.desc_zh}}</strong></p>
