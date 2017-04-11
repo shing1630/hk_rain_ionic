@@ -31,31 +31,26 @@
                 </ion-select>
             </ion-item>
 
-            <div class="centerAndMiddle">
-                <button ion-button type="button" full color="secondary" (click)="calWeather();" [disabled]="selectedYear == null || selectedMonth == null || selectedDay == null">
-                    {{ 'CW.GO' | translate }}
-                </button>
+            <div class="centerAndMiddle subComponent">
+                <button ion-button type="button" full color="secondary" (click)="calWeather();" class="marginToZero" [disabled]="selectedYear == null || selectedMonth == null || selectedDay == null">
+					{{ 'CW.GO' | translate }}
+				</button>
             </div>
-
         </ion-list>
+
+
     </form>
 
     <form id="calResultForm" *ngIf="showForecast || showResult">
         <ion-grid>
             <ion-row>
                 <ion-col col-12>
-                    <div *ngIf="showForecast" class="mainComponent">
-                        <div class="centerAndMiddle paddingTo10">
+                    <div *ngIf="showForecast" class="subComponent">
+                        <div class="centerAndMiddle">
                             <div class="form-group">
                                 <p class="fontLarge colorToWarning"><strong>{{'CW.FORECASR_EXPLAIN' | translate}}</strong></p>
                             </div>
                         </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col col-12>
-                    <div *ngIf="showForecast" class="subComponent">
                         <div class="centerAndMiddle paddingTo10">
                             <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast.day}} {{monthMap[forecast.month]}} ( {{weekDayEnMap[forecast.weekDay]}} ) </strong></p>
                             <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast.month}} {{'CW.MONTH' | translate}} {{forecast.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[forecast.weekDay]}} )</strong></p>
@@ -65,6 +60,11 @@
                             <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast.desc_zh}}</strong></p>
 
                         </div>
+                        <div class="centerAndMiddle subComponent">
+                            <button ion-button type="button" full color="secondary" (click)="backToCal();">
+								{{ 'CW.BACK' | translate }}
+							</button>
+                        </div>
                     </div>
                     <div *ngIf="showResult" class="subComponent">
                         <div class="centerAndMiddle paddingTo10">
@@ -73,7 +73,7 @@
                             <label *ngIf="IGV.gLangInd === 'en'" class="fontMiddle paddingBottomTo7">
                                     {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
                             <label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
-                                    {{weatherResult.year}} {{'CW.YEAR' | translate}} {{weatherResult.month}} {{'CW.MONTH' | translate}} {{weatherResult.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[weatherResult.weekDay]}} )  </label>
+                                    {{weatherResult.year}} {{'CW.YEAR' | translate}} {{weatherResult.month}} {{'CW.MONTH' | translate}} {{weatherResult.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[weatherResult.weekDay]}} )</label>
                             <label *ngIf="IGV.gLangInd === 'zh'" class="fontMiddle paddingBottomTo7">
                                     {{'CW.RECENT' | translate}}{{selectedFilterYear}}{{'CW.YEARS_OF_DATA' | translate}}</label>
 
@@ -118,67 +118,152 @@
 
                         <div class="centerAndMiddle">
                             <a href="javascript:void(0)" (click)="toggleMore();">
-                                <p class="fontLarge colorToWhite paddingBottomTo7" *ngIf="!showDtl"><strong>{{ 'CW.MORE' | translate }}  </strong>
-                                    <ion-icon name="arrow-dropdown-circle"></ion-icon>
-                                </p>
-                                <p class="fontLarge colorToWhite paddingBottomTo7" *ngIf="showDtl"><strong>{{ 'CW.LESS' | translate }}  </strong>
-                                    <ion-icon name="arrow-dropup-circle"></ion-icon>
+                                <p class="fontLarge colorToWhite paddingBottomTo7"><strong>{{ 'CW.MORE' | translate }}  </strong>
+                                    <ion-icon name="fastforward"></ion-icon>
                                 </p>
                             </a>
-
-                            <div *ngIf="showDtl">
-                                <div class="centerAndMiddle">
-                                    <p class="fontLarge colorToWarning"><strong>{{'WF.HKO_PROVIDED' | translate}}</strong></p>
-                                    <ion-grid>
-                                        <ion-row>
-                                            <ion-col col-4>
-                                                <div class="centerAndMiddle">
-                                                    <p class="fontXLarge"><strong>{{ 'CW.YEAR' | translate }}</strong></p>
-                                                </div>
-                                            </ion-col>
-                                            <ion-col col-4>
-                                                <div class="centerAndMiddle">
-                                                    <p class="fontXLarge"><strong>{{ 'CW.RAIN_INTENSITY' | translate }}</strong></p>
-                                                </div>
-                                            </ion-col>
-                                            <ion-col col-4>
-                                                <div class="centerAndMiddle">
-                                                    <p class="fontXLarge"><strong>{{ 'CW.RAINFALL' | translate }} (mm)</strong></p>
-                                                </div>
-                                            </ion-col>
-                                        </ion-row>
-                                        <div *ngFor="let weather of weatherDtlList;">
-                                            <ion-row>
-                                                <ion-col col-4>
-                                                    <div class="centerAndMiddle">
-                                                        <p>{{ weather.year }}</p>
-                                                    </div>
-                                                </ion-col>
-                                                <ion-col col-4>
-                                                    <div *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle">
-                                                        <p>{{ weather.rainfallDescZH }}</p>
-                                                    </div>
-                                                    <div *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle">
-                                                        <p>{{ weather.rainfallDescEN }}</p>
-                                                    </div>
-                                                </ion-col>
-                                                <ion-col col-4>
-                                                    <div class="centerAndMiddle">
-                                                        <p>{{ weather.rainfall }}</p>
-                                                    </div>
-                                                </ion-col>
-                                            </ion-row>
-                                        </div>
-                                    </ion-grid>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="centerAndMiddle subComponent">
+                            <button ion-button type="button" full color="secondary" (click)="backToCal();">
+								{{ 'CW.BACK' | translate }}
+							</button>
                         </div>
                     </div>
 
-                    <div class="centerAndMiddle subComponent">
-                        <button ion-button type="button" full color="secondary" (click)="backToCal();">
-                            {{ 'CW.BACK' | translate }}
-                        </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </form>
+
+    <form id="showCal2Form" *ngIf="!showCal2">
+        <ion-list>
+
+
+            <div class="centerAndMiddle subComponent">
+                <button ion-button type="button" full color="secondary" class="marginToZero" (click)="addCal2();">
+						<ion-icon name="add"></ion-icon>
+					</button>
+            </div>
+
+        </ion-list>
+    </form>
+
+    <form id="calInputForm2" *ngIf="showCal2 && !showResult2 && !showForecast2">
+        <ion-list>
+            <ion-item>
+                <ion-label>{{ 'CW.YEAR' | translate }}</ion-label>
+                <ion-select id="year2" name="year2" [(ngModel)]="selectedYear2" (ngModelChange)="yearChange2()">
+                    <ion-option *ngFor="let year2 of selectYearList2" value="{{year2.value}}">{{year2.label}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>{{ 'CW.MONTH' | translate }}</ion-label>
+                <ion-select id="month2" name="month2" [(ngModel)]="selectedMonth2" (ngModelChange)="monthChange2()">
+                    <ion-option *ngFor="let month2 of selectMonthList" value="{{month2.value}}">{{month2.label}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>{{ 'CW.DAY' | translate }}</ion-label>
+                <ion-select id="day2" name="day2" [(ngModel)]="selectedDay2" [disabled]="dayDisable2">
+                    <ion-option *ngFor="let day2 of selectDayList2" value="{{day2.value}}">{{day2.label}}</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <div class="centerAndMiddle subComponent">
+                <button ion-button type="button" full color="secondary" (click)="calWeather2();" class="marginToZero" [disabled]="selectedYear2 == null || selectedMonth2 == null || selectedDay2 == null">
+					{{ 'CW.GO' | translate }}
+				</button>
+            </div>
+
+        </ion-list>
+    </form>
+
+    <form id="calResultForm2" *ngIf="showForecast2 || showResult2">
+        <ion-grid>
+            <ion-row>
+                <ion-col col-12>
+                    <div *ngIf="showForecast2" class="subComponent">
+                        <div *ngIf="showForecast2" class="mainComponent">
+                            <div class="centerAndMiddle">
+                                <div class="form-group">
+                                    <p class="fontLarge colorToWarning"><strong>{{'CW.FORECASR_EXPLAIN' | translate}}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="centerAndMiddle paddingTo10">
+                            <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast2.day}} {{monthMap[forecast2.month]}} ( {{weekDayEnMap[forecast2.weekDay]}} ) </strong></p>
+                            <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast2.month}} {{'CW.MONTH' | translate}} {{forecast2.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[forecast2.weekDay]}} )</strong></p>
+                            <hr style="border-top: 3px solid #eee; margin-top: 0px;" />
+                            <p class="fontLarge"><strong>{{forecast2.temp}}</strong></p>
+                            <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast2.desc_en}}</strong></p>
+                            <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast2.desc_zh}}</strong></p>
+
+                        </div>
+                    </div>
+                    <div *ngIf="showResult2" class="subComponent">
+                        <div class="centerAndMiddle paddingTo10">
+                            <label *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle fontLarge paddingBottomTo7">
+                                    {{weatherResult2.day}} {{monthMap[weatherResult2.month]}} {{weatherResult2.year}} ( {{weekDayEnMap[weatherResult2.weekDay]}} )</label>
+                            <label *ngIf="IGV.gLangInd === 'en'" class="fontMiddle paddingBottomTo7">
+                                    {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
+                            <label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
+                                    {{weatherResult2.year}} {{'CW.YEAR' | translate}} {{weatherResult2.month}} {{'CW.MONTH' | translate}} {{weatherResult2.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[weatherResult2.weekDay]}} )</label>
+                            <label *ngIf="IGV.gLangInd === 'zh'" class="fontMiddle paddingBottomTo7">
+                                    {{'CW.RECENT' | translate}}{{selectedFilterYear}}{{'CW.YEARS_OF_DATA' | translate}}</label>
+
+                        </div>
+                        <div class="centerAndMiddle">
+                            <img [src]="weatherIconPath2" />
+                        </div>
+                        <div class="centerAndMiddle">
+                            <div class=" colorToWarning">
+                                <p class="fontXXLarge"><strong>{{ weatherResult2.rainYear | number : '1.1-1' }}% {{ 'CW.WILL_RAIN' | translate }}</strong></p>
+                            </div>
+                            <div class="">
+                                <p class="fontXLarge"><strong>{{ 'CW.TEMPERATURE' | translate }} {{ weatherResult2.temp | number : '1.1-1' }}°C</strong></p>
+                            </div>
+                            <div class="">
+                                <p class="fontXLarge"><strong>{{ 'CW.HUMIDITY' | translate }} {{ weatherResult2.humidity | number : '1.1-1' }}%</strong></p>
+                            </div>
+                        </div>
+
+                        <div class="paddingToZero">
+                            <hr style="border-top: 3px solid #eee;" />
+                        </div>
+
+                        <div *ngIf="weatherResult2.drizzle !== 0" class="centerAndMiddle">
+                            <p class="fontLarge" [ngClass]="{'colorToWarning': maxRainValue === weatherResult2.drizzle }"><strong>{{ weatherResult2.drizzle | number : '1.1-1' }}% {{ 'CW.DRIZZLE' | translate }}</strong></p>
+                        </div>
+                        <div *ngIf="weatherResult2.light !== 0" class="centerAndMiddle">
+                            <p class="fontLarge" [ngClass]="{'colorToWarning': maxRainValue === weatherResult2.light }"><strong>{{ weatherResult2.light | number : '1.1-1' }}% {{ 'CW.LIGHT_RAIN' | translate }}</strong></p>
+                        </div>
+                        <div *ngIf="weatherResult2.moderate !== 0" class="centerAndMiddle">
+                            <p class="fontLarge" [ngClass]="{'colorToWarning': maxRainValue === weatherResult2.moderate }"><strong>{{ weatherResult2.moderate | number : '1.1-1' }}% {{ 'CW.MODERATE_RAIN' | translate }}</strong></p>
+                        </div>
+                        <div *ngIf="weatherResult2.heavy !== 0" class="centerAndMiddle">
+                            <p class="fontLarge" [ngClass]="{'colorToWarning': maxRainValue === weatherResult2.heavy }"><strong>{{ weatherResult2.heavy | number : '1.1-1' }}% {{ 'CW.HEAVY_RAIN' | translate }}</strong></p>
+                        </div>
+                        <div *ngIf="weatherResult2.violent !== 0" class="centerAndMiddle">
+                            <p class="fontLarge" [ngClass]="{'colorToWarning': maxRainValue === weatherResult2.violent }"><strong>{{ weatherResult2.violent | number : '1.1-1' }}% {{ 'CW.VIOLENT_RAIN' | translate }}</strong></p>
+                        </div>
+                        <div *ngIf="weatherResult2.torrential !== 0" class="centerAndMiddle">
+                            <p class="fontLarge" [ngClass]="{'colorToWarning': maxRainValue === weatherResult2.torrential }"><strong>{{ weatherResult2.torrential | number : '1.1-1' }}% {{ 'CW.Torrential_rain' | translate }}</strong></p>
+                        </div>
+
+                        <div class="centerAndMiddle">
+                            <a href="javascript:void(0)" (click)="toggleMore2();">
+                                <p class="fontLarge colorToWhite paddingBottomTo7"><strong>{{ 'CW.MORE' | translate }}  </strong>
+                                    <ion-icon name="fastforward"></ion-icon>
+                                </p>
+                            </a>
+                        </div>
+                        <div class="centerAndMiddle subComponent">
+                            <button ion-button type="button" full color="secondary" (click)="backToCal2();">
+								{{ 'CW.BACK' | translate }}
+							</button>
+                        </div>
                     </div>
                 </ion-col>
             </ion-row>

@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
+import { CalculateWeatherDtl } from '../pages/calculateWeather/CalculateWeatherDtl';
 import { Setting } from '../pages/setting/setting';
 import { About } from '../pages/about/about';
 import { RptFeedback } from '../pages/rptFeedback/rptFeedback';
@@ -18,12 +19,16 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     MyApp,
     WeatherForecast,
     CalculateWeather,
+    CalculateWeatherDtl,
     Setting,
     About,
     RptFeedback
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+          backButtonText: ' '
+        }, {}
+      ),
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),
@@ -35,6 +40,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     MyApp,
     WeatherForecast,
     CalculateWeather,
+    CalculateWeatherDtl,
     Setting,
     About,
     RptFeedback

@@ -53,6 +53,12 @@ ion-col {
   height: 150px;
 }
 
+ion-refresher-content *{
+  stroke: $basicColor !important;
+  color: $basicColor !important;
+}
+
+
 // **********************************************//
 // **************** FadeInDev *******************//
 // **********************************************//
@@ -201,6 +207,10 @@ a:hover, a:active, a:focus {
 
 .backgroundColorToWhite{
 	background-color: white;
+}
+
+.marginToZero{
+	margin:0px;
 }
 
 .marginTopTo20{

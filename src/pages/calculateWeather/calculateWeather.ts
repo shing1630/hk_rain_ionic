@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { Component, OnInit, Inject } from '@angular/core';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
 
 import { Weather } from "../../models/Weather";
 import { ResultWeather } from "../../models/ResultWeather";
 import { Forecast } from "../../models/Forecast";
 import { WeatherService } from "../../services/weather.service";
 import { ForecastService } from "../../services/forecast.service";
+import { CalculateWeatherDtl } from "../../pages/calculateWeather/CalculateWeatherDtl";
 import { OT_GV, IGV } from './../../globalVar/gv';
-import { Inject } from '@angular/core';
 
 @Component({
     selector: 'my-calculateWeather',
@@ -33,7 +33,6 @@ export class CalculateWeather implements OnInit {
     showResult: boolean;
     forecast: Forecast;
     showForecast: boolean;
-    showDtl: boolean;
     weatherDtlList: Weather[];
 
     // 22222222 calculate weather 2222222222 
@@ -52,7 +51,6 @@ export class CalculateWeather implements OnInit {
     showCal2: boolean;
     forecast2: Forecast;
     showForecast2: boolean;
-    showDtl2: boolean;
     weatherDtlList2: Weather[];
 
     monthMap: {};
@@ -66,7 +64,8 @@ export class CalculateWeather implements OnInit {
         private loadingCtrl: LoadingController,
         private alertCtrl: AlertController,
         private weatherService: WeatherService,
-        private forecastService: ForecastService) {
+        private forecastService: ForecastService,
+        public navCtrl: NavController, ) {
 
         this.monthMap = IGV.monthMap;
         this.weekDayEnMap = IGV.weekDayEnMap;
@@ -105,7 +104,6 @@ export class CalculateWeather implements OnInit {
         this.showResult = false;
         this.forecast = null;
         this.showForecast = false;
-        this.showDtl = false;
         this.weatherDtlList = null;
     }
 
@@ -123,7 +121,6 @@ export class CalculateWeather implements OnInit {
         this.showCal2 = false;
         this.forecast2 = null;
         this.showForecast2 = false;
-        this.showDtl2 = false;
         this.weatherDtlList2 = null;
     }
 
@@ -141,7 +138,6 @@ export class CalculateWeather implements OnInit {
 
         this.monthChange();
     }
-
     init2() {
         let currDate = new Date();
         this.selectYearList2 = [
@@ -326,111 +322,73 @@ export class CalculateWeather implements OnInit {
     }
     calWeather2() {
 
+        this.loadingPresent();
+
         //check forecast Date
         let isForecast2: boolean = false;
         let inputDate2: Date = new Date(Number(this.selectedYear2),
             Number(this.selectedMonth2) - 1, Number(this.selectedDay2));
 
         for (var i = 0; i < 9; i++) {
-            let currDate2: Date = new Date();
-            currDate2.setDate(currDate2.getDate() + i);
-            currDate2.setHours(0, 0, 0, 0);
-            if (inputDate2.getTime() === currDate2.getTime()) {
+            let currDate: Date = new Date();
+            currDate.setDate(currDate.getDate() + i);
+            currDate.setHours(0, 0, 0, 0);
+            if (inputDate2.getTime() === currDate.getTime()) {
                 isForecast2 = true;
                 break;
             }
         }
 
         // calculate week day
-        // let weekDay2 = Number(new Date(Number(this.selectedYear2),
-        //     Number(this.selectedMonth2) - 1, Number(this.selectedDay2)).getDay());
+        let weekDay = Number(new Date(Number(this.selectedYear2),
+            Number(this.selectedMonth2) - 1, Number(this.selectedDay2)).getDay());
 
-        // if (isForecast2) {
-        //     this.showResult2 = false;
-        //     this.forecastService.getSingleForecast(Number(this.selectedMonth2), Number(this.selectedDay2))
-        //         .then(forecast2 => {
-        //             this.forecast2 = forecast2;
-        //             this.forecast2.weekDay = weekDay2;
-        //             this.showForecast2 = true;
-        //         }).catch(error => {this.msgs.push({ severity: 'error', summary: 'Error: ', detail: 'Something went wrong...' });});
-        // } else {
-        //     this.showForecast2 = false;
-        //     this.weatherService
-        //         .getCalWeather(this.selectedYear2, this.selectedMonth2, this.selectedDay2, this.selectedFilterYear)
-        //         .then(result => {
-        //             this.weatherResult2 = result;
-        //             this.weatherIconPath2 = this.getCalWeatherIconPath(this.weatherResult2);
-        //             this.maxRainValue2 = Math.max(Number(this.weatherResult2.drizzle), Number(this.weatherResult2.light)),
-        //                 Number(this.weatherResult2.moderate), Number(this.weatherResult2.heavy),
-        //                 Number(this.weatherResult2.violent), Number(this.weatherResult2.torrential);
-        //             this.weatherResult2.weekDay = weekDay2;
-        //             this.showResult2 = true;
-        //         })
-        //         .catch(error => {
-        //             this.error2 = error;
-        //             console.log('error2: ' + this.error2);
-        //         }); // TODO: Display error message
-        // }
+        if (isForecast2) {
+            this.showResult2 = false;
+            this.forecastService.getSingleForecast(Number(this.selectedMonth2), Number(this.selectedDay2))
+                .then(forecast => {
+                    this.forecast2 = forecast;
+                    this.forecast2.weekDay = weekDay;
+                    this.showForecast2 = true;
+                    this.loadingDismiss();
+                }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
+        } else {
+            this.showForecast2 = false;
+            // calculate weather
+            this.weatherService
+                .getCalWeather(this.selectedYear2, this.selectedMonth2, this.selectedDay2, this.selectedFilterYear)
+                .then(result => {
+                    this.weatherResult2 = result;
+                    this.weatherIconPath2 = this.getCalWeatherIconPath(this.weatherResult2);
+                    this.maxRainValue2 = Math.max(Number(this.weatherResult2.drizzle), Number(this.weatherResult2.light)),
+                        Number(this.weatherResult2.moderate), Number(this.weatherResult2.heavy),
+                        Number(this.weatherResult2.violent), Number(this.weatherResult2.torrential);
+
+                    this.weatherResult2.weekDay = weekDay;
+                    this.showResult2 = true;
+                    this.loadingDismiss();
+                }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
+        }
     }
 
-    toggleMore() {
-        this.getWeatherDtlList1();
-
-    }
-    toggleMore2() {
-        this.getWeatherDtlList2();
-
-    }
-
-    getWeatherDtlList1() {
-        this.loadingPresent();
-        this.weatherService
-            .getWeatherDtlList(this.selectedMonth, this.selectedDay, this.selectedFilterYear)
-            .then(result => {
-                for (var key in result) {
-                    if (result.hasOwnProperty(key)) {
-                        // Change rainfall 999 to 0.05
-                        if (result[key].rainfall === 999) {
-                            result[key].rainfall = 0.05;
-                        }
-
-                        result[key].rainfallDescEN = this.getRainfallDescEN(result[key].rainfall);
-                        result[key].rainfallDescZH = this.getRainfallDescZH(result[key].rainfall);
-                    }
-                }
-                this.showDtl = !this.showDtl;
-                this.weatherDtlList = result;
-                this.loadingDismiss();
-            })
-            .catch(error => { this.presentSysErr(); this.loadingDismiss(); }); // TODO: Display error message
-
-    }
-    getWeatherDtlList2() {
-        this.weatherService
-            .getWeatherDtlList(this.selectedMonth2, this.selectedDay2, this.selectedFilterYear)
-            .then(result => {
-                for (var key in result) {
-                    if (result.hasOwnProperty(key)) {
-                        // Change rainfall 999 to 0.05
-                        if (result[key].rainfall === 999) {
-                            result[key].rainfall = 0.05;
-                        }
-
-                        result[key].rainfallDescEN = this.getRainfallDescEN(result[key].rainfall);
-                        result[key].rainfallDescZH = this.getRainfallDescZH(result[key].rainfall);
-                    }
-                }
-                this.weatherDtlList2 = result;
-                this.showDtl2 = !this.showDtl2;
-            })
-            .catch(error => {
-                console.log('error2: ' + this.error2);
-            }); // TODO: Display error message
-
-    }
-
-    addCalInputForm() {
+	addCal2() {
         this.showCal2 = true;
+    }
+	
+    toggleMore() {
+        this.navCtrl.push(CalculateWeatherDtl, {
+            selectedMonth: this.selectedMonth,
+            selectedDay: this.selectedDay,
+            selectedFilterYear: this.selectedFilterYear
+        });
+    }
+
+    toggleMore2(event, item) {
+        this.navCtrl.push(CalculateWeatherDtl, {
+            selectedMonth: this.selectedMonth2,
+            selectedDay: this.selectedDay2,
+            selectedFilterYear: this.selectedFilterYear
+        });
     }
 
     getCalWeatherIconPath(weatherResult: ResultWeather) {
@@ -530,45 +488,10 @@ export class CalculateWeather implements OnInit {
         this.showResult = false;
         this.showForecast = false;
     }
-    backToCa2l() {
+    backToCal2() {
         this.showResult2 = false;
         this.showForecast2 = false;
     }
 
-    getRainfallDescEN(rainfall: any) {
-        if (rainfall === 0) {
-            return this.IGV.SUNSHINE_EN;
-        } else if (rainfall === this.IGV.DRIZZLE_THRESHOLD) {
-            return this.IGV.DRIZZLE_EN;
-        } else if (rainfall <= this.IGV.LIGHT_THRESHOLD) {
-            return this.IGV.LIGHT_EN;
-        } else if (rainfall <= this.IGV.MODERATE_THRESHOLD) {
-            return this.IGV.MODERATE_EN;
-        } else if (rainfall <= this.IGV.HEAVY_THRESHOLD) {
-            return this.IGV.HEAVY_EN;
-        } else if (rainfall <= this.IGV.VIOLENT_THRESHOLD) {
-            return this.IGV.VIOLENT_EN;
-        } else if (rainfall >= this.IGV.TORRENTIAL_THRESHOLD) {
-            return this.IGV.TORRENTIAL_EN;
-        }
-    }
-
-    getRainfallDescZH(rainfall: any) {
-        if (rainfall === 0) {
-            return this.IGV.SUNSHINE_ZH;
-        } else if (rainfall === this.IGV.DRIZZLE_THRESHOLD) {
-            return this.IGV.DRIZZLE_ZH;
-        } else if (rainfall <= this.IGV.LIGHT_THRESHOLD) {
-            return this.IGV.LIGHT_ZH;
-        } else if (rainfall <= this.IGV.MODERATE_THRESHOLD) {
-            return this.IGV.MODERATE_ZH;
-        } else if (rainfall <= this.IGV.HEAVY_THRESHOLD) {
-            return this.IGV.HEAVY_ZH;
-        } else if (rainfall <= this.IGV.VIOLENT_THRESHOLD) {
-            return this.IGV.VIOLENT_ZH;
-        } else if (rainfall >= this.IGV.TORRENTIAL_THRESHOLD) {
-            return this.IGV.TORRENTIAL_ZH;
-        }
-    }
 
 }
