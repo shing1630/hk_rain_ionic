@@ -16,6 +16,13 @@
           <ion-option *ngFor="let year of selectFilterYearList" value="{{year.value}}">{{year.label}}</ion-option>
         </ion-select>
       </ion-item>
+
+      <div class="centerAndMiddle subComponent">
+        <button ion-button type="button" full color="secondary" (click)="resetting();" class="marginToZero">
+         {{ 'SET.RESET' | translate }}
+        </button>
+      </div>
+
     </ion-list>
   </form>
 </ion-content>

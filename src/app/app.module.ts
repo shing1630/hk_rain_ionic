@@ -12,6 +12,7 @@ import { ForecastService } from '../services/forecast.service';
 import { WeatherService } from '../services/weather.service';
 import { FeedbackService } from '../services/feedback.service';
 import { OT_GV, IGV } from './../globalVar/gv';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
 @NgModule({
@@ -50,7 +51,8 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     { provide: OT_GV, useValue: IGV },
     ForecastService,
     WeatherService,
-    FeedbackService
+    FeedbackService,
+    NativeStorage
   ]
 })
 export class AppModule { }

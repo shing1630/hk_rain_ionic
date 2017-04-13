@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { TranslateService } from 'ng2-translate';
 
 import { OT_GV, IGV } from './../../globalVar/gv';
 
@@ -17,7 +19,9 @@ export class Setting {
   constructor(
     @Inject(OT_GV) private IGV: IGV,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+	public translate: TranslateService,
+    public nativeStorage: NativeStorage) {
 
     this.loadingPresent();
     // Set filter year from gloalVar
@@ -67,11 +71,44 @@ export class Setting {
 
   changeFilterYear() {
     this.IGV.filterYear = this.selectedFilterYear;
+
+    this.nativeStorage.remove('mySetting')
+      .then(
+      () => {
+        this.nativeStorage.setItem('mySetting', { langInd: this.IGV.gLangInd, filterYear: this.IGV.filterYear })
+          .then(
+          () => { },
+          error => { this.presentSysErr() }
+          );
+      },
+      error => { this.presentSysErr() }
+      );
+
     if (this.IGV.gLangInd === 'en') {
       this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_EN, this.IGV.NO_OF_YEARS_CHANGED_TO_EN + this.selectedFilterYear);
     } else {
       this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_ZH, this.IGV.NO_OF_YEARS_CHANGED_TO_ZH + this.selectedFilterYear);
     }
+  }
+
+  resetting() {
+    this.nativeStorage.remove('mySetting')
+      .then(
+      () => {
+        this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
+          .then(
+          () => { },
+          error => { this.presentSysErr() }
+          );
+      },
+      error => { this.presentSysErr() }
+      );
+	  
+	  this.IGV.filterYear = 45;
+	  this.selectedFilterYear = 45;
+	  this.translate.use('zh');
+	  this.IGV.gLangInd = 'zh';
+	  
   }
 
 }

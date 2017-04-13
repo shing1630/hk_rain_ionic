@@ -54,7 +54,8 @@
     "BACK": "Back"
   },
   "SET": {
-    "YEARS_OF_DATA_TO_USE": "Years of data to use"
+    "YEARS_OF_DATA_TO_USE": "Years of data to use",
+    "RESET": "Reset"
   },
   "FB": {
     "NAME": "Name",

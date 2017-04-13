@@ -54,7 +54,8 @@
     "BACK": "返回"
   },
   "SET": {
-    "YEARS_OF_DATA_TO_USE": "利用數據的年數"
+    "YEARS_OF_DATA_TO_USE": "利用數據的年數",
+    "RESET": "重設"
   },
   "FB": {
     "NAME": "名",

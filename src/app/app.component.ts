@@ -1,7 +1,10 @@
+
 import { Component, ViewChild, Inject } from '@angular/core';
 import { Platform, MenuController, Nav, LoadingController, AlertController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { StatusBar, Splashscreen } from 'ionic-native';
+import { NativeStorage } from '@ionic-native/native-storage';
+
 
 import { OT_GV, IGV } from './../globalVar/gv';
 
@@ -29,7 +32,8 @@ export class MyApp {
     private alertCtrl: AlertController,
     public platform: Platform,
     public menu: MenuController,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public nativeStorage: NativeStorage
   ) {
     this.initializeApp(translate);
   }
@@ -67,9 +71,39 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
       this.loadingDismiss();
+
+      this.nativeStorage.getItem('mySetting')
+        .then(
+        data => {
+          if (data !== null) {
+            translate.setDefaultLang(data.langInd);
+            this.IGV.gLangInd = data.langInd;
+            this.IGV.filterYear = data.filterYear;
+          } else {
+            this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
+              .then(
+              () => { },
+              error => { this.presentSysErr() }
+              );
+            translate.setDefaultLang('zh');
+            this.IGV.gLangInd = 'zh';
+
+          }
+
+        },
+        error => {
+          this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
+            .then(
+            () => { },
+            error => { this.presentSysErr() }
+            );
+          translate.setDefaultLang('zh');
+          this.IGV.gLangInd = 'zh';
+        }
+        );
+
     });
-    translate.setDefaultLang('zh');
-    this.IGV.gLangInd = 'zh';
+
   }
 
   openPage(page) {
@@ -109,6 +143,18 @@ export class MyApp {
   changeLangInd(lang) {
     this.translate.use(lang);
     this.IGV.gLangInd = lang;
+
+    this.nativeStorage.remove('mySetting')
+      .then(
+      () => {
+        this.nativeStorage.setItem('mySetting', { langInd: this.IGV.gLangInd, filterYear: this.IGV.filterYear })
+        .then(
+        () => { },
+        error => { this.presentSysErr() }
+        );
+      },
+      error => { this.presentSysErr() }
+      );
     this.menu.close();
   }
 }
