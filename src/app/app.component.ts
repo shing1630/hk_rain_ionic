@@ -83,7 +83,7 @@ export class MyApp {
             this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
               .then(
               () => { },
-              error => { this.presentSysErr() }
+              error => {alert('1: '+JSON.stringify(error)); this.presentSysErr() }
               );
             translate.setDefaultLang('zh');
             this.IGV.gLangInd = 'zh';
@@ -95,7 +95,7 @@ export class MyApp {
           this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
             .then(
             () => { },
-            error => { this.presentSysErr() }
+            error => {alert('2: '+JSON.stringify(error)); this.presentSysErr() }
             );
           translate.setDefaultLang('zh');
           this.IGV.gLangInd = 'zh';
@@ -150,10 +150,10 @@ export class MyApp {
         this.nativeStorage.setItem('mySetting', { langInd: this.IGV.gLangInd, filterYear: this.IGV.filterYear })
         .then(
         () => { },
-        error => { this.presentSysErr() }
+        error => { alert('lang 1: '+JSON.stringify(error)); this.presentSysErr() }
         );
       },
-      error => { this.presentSysErr() }
+      error => { alert('lang 2: '+JSON.stringify(error)); this.presentSysErr() }
       );
     this.menu.close();
   }
