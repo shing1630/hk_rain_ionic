@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { LoadingController, AlertController } from 'ionic-angular';
-import { NativeStorage } from '@ionic-native/native-storage';
 import { TranslateService } from 'ng2-translate';
+import { Storage } from '@ionic/storage';
 
 import { OT_GV, IGV } from './../../globalVar/gv';
 
@@ -17,11 +17,11 @@ export class Setting {
   loading: any;
 
   constructor(
-    @Inject(OT_GV) private IGV: IGV,
-    private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
-	public translate: TranslateService,
-    public nativeStorage: NativeStorage) {
+    @Inject(OT_GV) public IGV: IGV,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
+    public translate: TranslateService,
+    public storage: Storage) {
 
     this.loadingPresent();
     // Set filter year from gloalVar
@@ -72,17 +72,11 @@ export class Setting {
   changeFilterYear() {
     this.IGV.filterYear = this.selectedFilterYear;
 
-    this.nativeStorage.remove('mySetting')
-      .then(
-      () => {
-        this.nativeStorage.setItem('mySetting', { langInd: this.IGV.gLangInd, filterYear: this.IGV.filterYear })
-          .then(
-          () => { },
-          error => { this.presentSysErr() }
-          );
-      },
-      error => { this.presentSysErr() }
-      );
+    this.storage.ready().then(() => {
+      this.storage.set('mySetting', { langInd: this.IGV.gLangInd, filterYear: this.IGV.filterYear });
+    }, (error) => {
+      this.presentSysErr();
+    });
 
     if (this.IGV.gLangInd === 'en') {
       this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_EN, this.IGV.NO_OF_YEARS_CHANGED_TO_EN + this.selectedFilterYear);
@@ -92,23 +86,12 @@ export class Setting {
   }
 
   resetting() {
-    this.nativeStorage.remove('mySetting')
-      .then(
-      () => {
-        this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
-          .then(
-          () => { },
-          error => { this.presentSysErr() }
-          );
-      },
-      error => { this.presentSysErr() }
-      );
-	  
-	  this.IGV.filterYear = 45;
-	  this.selectedFilterYear = 45;
-	  this.translate.use('zh');
-	  this.IGV.gLangInd = 'zh';
-	  
+    this.IGV.filterYear = 45;
+    this.selectedFilterYear = 45;
+    this.translate.use('zh');
+    this.IGV.gLangInd = 'zh';
+
+    this.changeFilterYear();
   }
 
 }

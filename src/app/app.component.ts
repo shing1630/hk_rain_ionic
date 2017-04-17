@@ -3,8 +3,7 @@ import { Component, ViewChild, Inject } from '@angular/core';
 import { Platform, MenuController, Nav, LoadingController, AlertController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { StatusBar, Splashscreen } from 'ionic-native';
-import { NativeStorage } from '@ionic-native/native-storage';
-
+import { Storage } from '@ionic/storage';
 
 import { OT_GV, IGV } from './../globalVar/gv';
 
@@ -27,13 +26,13 @@ export class MyApp {
   loading: any;
 
   constructor(
-    @Inject(OT_GV) private IGV: IGV,
-    private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
+    @Inject(OT_GV) public IGV: IGV,
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
     public platform: Platform,
     public menu: MenuController,
     public translate: TranslateService,
-    public nativeStorage: NativeStorage
+    public storage: Storage
   ) {
     this.initializeApp(translate);
   }
@@ -72,38 +71,28 @@ export class MyApp {
       Splashscreen.hide();
       this.loadingDismiss();
 
-      this.nativeStorage.getItem('mySetting')
-        .then(
-        data => {
-          if (data !== null) {
-            translate.setDefaultLang(data.langInd);
-            this.IGV.gLangInd = data.langInd;
-            this.IGV.filterYear = data.filterYear;
-          } else {
-            this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
-              .then(
-              () => { },
-              error => {alert('1: '+JSON.stringify(error)); this.presentSysErr() }
-              );
-            translate.setDefaultLang('zh');
-            this.IGV.gLangInd = 'zh';
+      this.translate.use('zh');
+      this.IGV.gLangInd = 'zh';
 
+      this.storage.ready().then(() => {
+
+        // Get mySetting
+        this.storage.get('mySetting').then((val) => {
+          if (val !== null) {
+            this.translate.use(val.langInd);
+            this.IGV.gLangInd = val.langInd;
+            this.IGV.filterYear = val.filterYear;
+          } else {
+            // Set mySetting
+            this.storage.set('mySetting', { langInd: 'zh', filterYear: 45 });
           }
 
-        },
-        error => {
-          this.nativeStorage.setItem('mySetting', { langInd: 'zh', filterYear: 45 })
-            .then(
-            () => { },
-            error => {alert('2: '+JSON.stringify(error)); this.presentSysErr() }
-            );
-          translate.setDefaultLang('zh');
-          this.IGV.gLangInd = 'zh';
-        }
-        );
+        });
+      }, (error) => {
+        this.presentSysErr();
+      });
 
     });
-
   }
 
   openPage(page) {
@@ -144,17 +133,14 @@ export class MyApp {
     this.translate.use(lang);
     this.IGV.gLangInd = lang;
 
-    this.nativeStorage.remove('mySetting')
-      .then(
-      () => {
-        this.nativeStorage.setItem('mySetting', { langInd: this.IGV.gLangInd, filterYear: this.IGV.filterYear })
-        .then(
-        () => { },
-        error => { alert('lang 1: '+JSON.stringify(error)); this.presentSysErr() }
-        );
-      },
-      error => { alert('lang 2: '+JSON.stringify(error)); this.presentSysErr() }
-      );
+    this.storage.ready().then(() => {
+      this.storage.set('mySetting', { langInd: lang, filterYear: this.IGV.filterYear });
+    }, (error) => {
+      this.presentSysErr();
+    });
+
     this.menu.close();
   }
+
+
 }

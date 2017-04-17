@@ -13,14 +13,12 @@
             <ion-col col-12>
                 <div class="mainComponent centerAndMiddle paddingTo10">
                     <p class="fontLarge colorToWarning"><strong>{{'WF.HKO_PROVIDED' | translate}}</strong></p>
-					<label *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle fontLarge paddingBottomTo7">
+                    <label *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{selectedDay}} {{monthMap[selectedMonth]}} </label>
-                    <label *ngIf="IGV.gLangInd === 'en'" class="fontMiddle paddingBottomTo7">
-                                    {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
-					<label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
+                    <label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{selectedMonth}} {{'CW.MONTH' | translate}} {{selectedDay}} {{'CW.DAY' | translate}}</label>
-                    <label *ngIf="IGV.gLangInd === 'zh'" class="fontMiddle paddingBottomTo7">
-                                    {{'CW.RECENT' | translate}}{{selectedFilterYear}}{{'CW.YEARS_OF_DATA' | translate}}</label>
+                    <label class="fontMiddle paddingBottomTo7">
+                                    {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
                     <ion-grid>
                         <ion-row>
                             <ion-col col-4>

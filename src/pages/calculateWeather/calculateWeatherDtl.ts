@@ -18,6 +18,8 @@ export class CalculateWeatherDtl {
     weatherDtlList: Weather[];
     loading: any;
 
+    monthMap: {};
+
     constructor(
         @Inject(OT_GV) private IGV: IGV,
         public navCtrl: NavController,
@@ -31,6 +33,8 @@ export class CalculateWeatherDtl {
         this.selectedDay = navParams.get('selectedDay');
         this.selectedFilterYear = navParams.get('selectedFilterYear');
         this.getWeatherDtlList();
+
+        this.monthMap = IGV.monthMap;
     }
 
     resetWeatherDtl() {

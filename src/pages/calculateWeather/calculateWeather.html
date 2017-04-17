@@ -70,12 +70,11 @@
                         <div class="centerAndMiddle paddingTo10">
                             <label *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{weatherResult.day}} {{monthMap[weatherResult.month]}} {{weatherResult.year}} ( {{weekDayEnMap[weatherResult.weekDay]}} )</label>
-                            <label *ngIf="IGV.gLangInd === 'en'" class="fontMiddle paddingBottomTo7">
-                                    {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
                             <label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{weatherResult.year}} {{'CW.YEAR' | translate}} {{weatherResult.month}} {{'CW.MONTH' | translate}} {{weatherResult.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[weatherResult.weekDay]}} )</label>
-                            <label *ngIf="IGV.gLangInd === 'zh'" class="fontMiddle paddingBottomTo7">
-                                    {{'CW.RECENT' | translate}}{{selectedFilterYear}}{{'CW.YEARS_OF_DATA' | translate}}</label>
+
+                            <label class="fontMiddle paddingBottomTo7">
+                                    {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
 
                         </div>
                         <div class="centerAndMiddle">
@@ -206,12 +205,10 @@
                         <div class="centerAndMiddle paddingTo10">
                             <label *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{weatherResult2.day}} {{monthMap[weatherResult2.month]}} {{weatherResult2.year}} ( {{weekDayEnMap[weatherResult2.weekDay]}} )</label>
-                            <label *ngIf="IGV.gLangInd === 'en'" class="fontMiddle paddingBottomTo7">
-                                    {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
                             <label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{weatherResult2.year}} {{'CW.YEAR' | translate}} {{weatherResult2.month}} {{'CW.MONTH' | translate}} {{weatherResult2.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[weatherResult2.weekDay]}} )</label>
-                            <label *ngIf="IGV.gLangInd === 'zh'" class="fontMiddle paddingBottomTo7">
-                                    {{'CW.RECENT' | translate}}{{selectedFilterYear}}{{'CW.YEARS_OF_DATA' | translate}}</label>
+                            <label class="fontMiddle paddingBottomTo7">
+                                    {{'CW.RECENT' | translate}} {{selectedFilterYear}} {{'CW.YEARS_OF_DATA' | translate}}</label>
 
                         </div>
                         <div class="centerAndMiddle">
