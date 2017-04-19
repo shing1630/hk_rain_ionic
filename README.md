@@ -34,6 +34,11 @@ Install cordova
 npm install -g cordova
 ```
 
+Install typescript
+```
+// install typescript
+npm install -g typescript
+```
 
 Install Ionic CLI
 ```
@@ -42,12 +47,33 @@ npm install -g ionic
 ```
 
 ## Install packages
+```
+ npm install          <= install all the npm Dependencies listed in package.json
+```
 
+## Run app
 ```
-    npm install          <= install all the npm Dependencies listed in package.json
-    npm run build        <= build and compile 
-    npm run deploy       <= start the Nodemon and watch for changes.
+ionic serve          <= build and run ionic app in web application  
 ```
+
+## Run app in ios
+Must run in Mac OS
+```
+npm install -g ios-deploy
+npm install -g ios-sim version
+ionic platform add ios
+ionic build ios
+ionic run ios    <= run the application in an ios simulator that comes installed with xCode
+  
+```
+## Run app in android 
+Install android sdk first
+```
+ionic platform add android
+ionic build android
+ionic run android    <= run the app in your default emulator
+```
+
 
 ## Directory Structure
 
