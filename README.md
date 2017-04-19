@@ -5,8 +5,11 @@
 
 This is app application for forcasting the weather in Hong Kong.
 
-## ![Apple store](https://medwatcher.org/app/assets/images/appstore/apple-button.svg)
+## ![Apple store](https://www.seeklogo.net/wp-content/uploads/2012/12/download-on-the-app-store-logo-vector-400x400.png)
 ## [https://appsto.re/hk/zMbVib.i](https://appsto.re/hk/zMbVib.i)
+
+## ![Goolge Play](https://app.countrynavigator.com/assets/cn/img/google-play-badge.png)
+## [https://play.google.com/store/apps/details?id=com.hkrain0730](https://play.google.com/store/apps/details?id=com.hkrain0730)
 
 
 ## System Architecture
