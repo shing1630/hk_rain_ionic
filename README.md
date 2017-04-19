@@ -14,6 +14,7 @@ This is app application for forcasting the weather in Hong Kong.
 
 ## System Architecture
 
+![Ionic Framework](https://www.appfutura.com/blog/wp-content/uploads/2015/05/ionic.jpg)
 Front end: Ionic Framework + Cordova
 
 
