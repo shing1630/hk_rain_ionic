@@ -26,6 +26,7 @@ Install npm
 // install npm
 sudo apt-get install npm
 sudo apt-get update
+```
 
 Install cordova
 ```
@@ -33,7 +34,7 @@ Install cordova
 npm install -g cordova
 ```
 
-```
+
 Install Ionic CLI
 ```
 // install Ionic CLI
