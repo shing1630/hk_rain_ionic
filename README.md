@@ -8,7 +8,7 @@ This is app application for forcasting the weather in Hong Kong.
 ## ![Apple store](https://www.zapopen.com/images/AppStore_Button.png)
 ## [https://appsto.re/hk/zMbVib.i](https://appsto.re/hk/zMbVib.i)
 
-## ![Goolge Play](https://www.daysofwonder.com/online/en/img/ol_sw2_buy_google-play.png)
+## ![Goolge Play](https://object.cato.org/sites/cato.org/files/images/logos/google-play-button.png)
 ## [https://play.google.com/store/apps/details?id=com.hkrain0730](https://play.google.com/store/apps/details?id=com.hkrain0730)
 
 
