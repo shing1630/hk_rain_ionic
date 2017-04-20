@@ -42,6 +42,9 @@ export interface IGV {
     NO_OF_YEARS_CHANGED_TO_ZH: string;
     SUBMITTED_SUCCESSFULLY_EN: string;
     SUBMITTED_SUCCESSFULLY_ZH: string;
+
+    AD_MOB_ID_BANNER: string;
+    AD_MOB_ID_INTER: string;
 }
 
 export const IGV: IGV = {
@@ -94,5 +97,7 @@ export const IGV: IGV = {
     SUBMITTED_SUCCESSFULLY_EN: 'Submitted successfully!',
     SUBMITTED_SUCCESSFULLY_ZH: '成功遞交!',
 
+    AD_MOB_ID_BANNER: '',
+    AD_MOB_ID_INTER: ''
 };
 

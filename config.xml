@@ -87,5 +87,6 @@
   <plugin name="cordova-plugin-device" spec="1.1.4"/>
   <plugin name="cordova-plugin-splashscreen" spec="~4.0.1"/>
   <plugin name="cordova-sqlite-storage" spec="2.0.3"/>
+  <plugin name="cordova-plugin-admobpro" spec="2.28.3"/>
   <icon src="resources\android\icon\drawable-xhdpi-icon.png"/>
 </widget>

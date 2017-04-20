@@ -4,6 +4,7 @@ import { Platform, MenuController, Nav, LoadingController, AlertController } fro
 import { TranslateService } from 'ng2-translate';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
+import { AdMob, AdMobOptions } from '@ionic-native/admob';
 
 import { OT_GV, IGV } from './../globalVar/gv';
 
@@ -25,6 +26,12 @@ export class MyApp {
 
   loading: any;
 
+  private adMobId: any;
+  private adOptions: AdMobOptions = <AdMobOptions>{};
+
+  // Change it to true when production
+  private isTesting: boolean = true;
+
   constructor(
     @Inject(OT_GV) public IGV: IGV,
     public loadingCtrl: LoadingController,
@@ -32,7 +39,8 @@ export class MyApp {
     public platform: Platform,
     public menu: MenuController,
     public translate: TranslateService,
-    public storage: Storage
+    public storage: Storage,
+    private adMob: AdMob
   ) {
     this.initializeApp(translate);
   }
@@ -74,6 +82,7 @@ export class MyApp {
       this.translate.use('zh');
       this.IGV.gLangInd = 'zh';
 
+      // For local storage
       this.storage.ready().then(() => {
 
         // Get mySetting
@@ -92,8 +101,71 @@ export class MyApp {
         this.presentSysErr();
       });
 
+      // For adMob
+
+      this.initAds();
+
+
     });
   }
+
+  private initAds() {
+    if (!this.adMob) {
+      console.log("AdMob not found.");
+      return;
+    }
+    this.setAdMobIds();
+    this.setAdMobOptions();
+    this.showBanner();
+    this.showInterstitial();
+  }
+
+  private setAdMobIds() {
+    if (/(android)/i.test(navigator.userAgent)) {
+      this.adMobId = {
+        banner: 'ca-app-pub-7668464781725150/1638150628',
+        interstitial: 'ca-app-pub-7668464781725150/8044611026'
+      };
+      IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/1638150628';
+      IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/8044611026';
+    } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+      this.adMobId = {
+        banner: 'ca-app-pub-7668464781725150/6068350226',
+        interstitial: 'ca-app-pub-7668464781725150/6428277028'
+      };
+      IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/6068350226';
+      IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/6428277028';
+    } else {
+      this.adMobId = {
+        banner: ''
+      };
+    }
+  }
+
+  private setAdMobOptions() {
+    this.adOptions = {
+      position: this.adMob.AD_POSITION.BOTTOM_CENTER,
+      isTesting: this.isTesting,
+      autoShow: true
+      //adExtras: this.adExtras
+    }
+
+    this.adMob.setOptions(this.adOptions)
+  }
+
+  public showBanner() {
+    if (!this.adMob) return false;
+
+    this.adMob.createBanner({ adId: this.adMobId.banner });
+    return true;
+  }
+
+  public showInterstitial() {
+    if (!this.adMob) return false;
+    this.adMob.prepareInterstitial({ adId: this.adMobId.interstitial });
+    return true;
+  }
+
 
   openPage(page) {
     // close the menu when clicking a link from the menu

@@ -21,6 +21,7 @@
     "@angular/platform-server": "2.2.1",
     "@ionic/storage": "2.0.1",
     "@ionic-native/core": "3.4.4",
+    "@ionic-native/admob": "3.5.0",
     "cordova-sqlite-storage": "2.0.3",
     "ionic-angular": "2.0.0",
     "ionic-native": "2.4.1",
@@ -36,6 +37,7 @@
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
+    "cordova-plugin-admobpro",
     "cordova-plugin-console",
     "cordova-plugin-statusbar",
     "cordova-plugin-device",

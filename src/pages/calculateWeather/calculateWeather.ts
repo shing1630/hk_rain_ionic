@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { AdMob } from '@ionic-native/admob';
 
 import { Weather } from "../../models/Weather";
 import { ResultWeather } from "../../models/ResultWeather";
@@ -65,7 +66,8 @@ export class CalculateWeather implements OnInit {
         private alertCtrl: AlertController,
         private weatherService: WeatherService,
         private forecastService: ForecastService,
-        public navCtrl: NavController, ) {
+        public navCtrl: NavController,
+        private adMob: AdMob) {
 
         this.monthMap = IGV.monthMap;
         this.weekDayEnMap = IGV.weekDayEnMap;
@@ -74,6 +76,12 @@ export class CalculateWeather implements OnInit {
         // Set filter year from gloalVar
         this.selectedFilterYear = IGV.filterYear;
 
+    }
+
+    public showInterstitial() {
+        if (!this.adMob) return false;
+        this.adMob.prepareInterstitial({ adId: IGV.AD_MOB_ID_INTER });
+        return true;
     }
 
     loadingPresent() {
@@ -301,6 +309,7 @@ export class CalculateWeather implements OnInit {
                     this.forecast.weekDay = weekDay;
                     this.showForecast = true;
                     this.loadingDismiss();
+                    this.showInterstitial();
                 }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
         } else {
             this.showForecast = false;
@@ -317,6 +326,7 @@ export class CalculateWeather implements OnInit {
                     this.weatherResult.weekDay = weekDay;
                     this.showResult = true;
                     this.loadingDismiss();
+                    this.showInterstitial();
                 }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
         }
     }
@@ -371,10 +381,10 @@ export class CalculateWeather implements OnInit {
         }
     }
 
-	addCal2() {
+    addCal2() {
         this.showCal2 = true;
     }
-	
+
     toggleMore() {
         this.navCtrl.push(CalculateWeatherDtl, {
             selectedMonth: this.selectedMonth,
