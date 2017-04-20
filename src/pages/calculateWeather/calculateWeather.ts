@@ -81,6 +81,7 @@ export class CalculateWeather implements OnInit {
     public showInterstitial() {
         if (!this.adMob) return false;
         this.adMob.prepareInterstitial({ adId: IGV.AD_MOB_ID_INTER });
+        this.adMob.showInterstitial();
         return true;
     }
 

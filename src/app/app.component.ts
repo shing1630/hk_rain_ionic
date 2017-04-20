@@ -40,7 +40,7 @@ export class MyApp {
     public menu: MenuController,
     public translate: TranslateService,
     public storage: Storage,
-    private adMob: AdMob
+    public adMob: AdMob
   ) {
     this.initializeApp(translate);
   }
@@ -163,6 +163,7 @@ export class MyApp {
   public showInterstitial() {
     if (!this.adMob) return false;
     this.adMob.prepareInterstitial({ adId: this.adMobId.interstitial });
+    this.adMob.showInterstitial();
     return true;
   }
 
