@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
 
 import { OT_GV, IGV } from './../../globalVar/gv';
 import { GlobalFunc } from './../../globalFunc/globalFunc';
@@ -23,7 +22,6 @@ export class WeatherForecast {
 
   constructor(
     @Inject(OT_GV) private IGV: IGV,
-    private loadingCtrl: LoadingController,
     public globalFunc: GlobalFunc,
     private forecastService: ForecastService) {
     this.monthMap = IGV.monthMap;
@@ -31,23 +29,8 @@ export class WeatherForecast {
     this.weekDayZhMap = IGV.weekDayZhMap;
   }
 
-  loadingPresent() {
-    this.loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `
-                <div class="centerAndMiddle">
-                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
-                </div>`,
-    });
-    this.loading.present();
-  }
-
-  loadingDismiss() {
-    this.loading.dismiss();
-  }
-
   ngOnInit() {
-    this.loadingPresent();
+    this.globalFunc.loadingPresent();
     this.forecastService.getForecast()
       .then(forecastList => {
         this.forecastList = forecastList;
@@ -63,8 +46,8 @@ export class WeatherForecast {
             }
           }
         }
-        this.loadingDismiss();
-      }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
+        this.globalFunc.loadingDismiss();
+      }).catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); });
   }
 
   refreshForecast(refresher) {

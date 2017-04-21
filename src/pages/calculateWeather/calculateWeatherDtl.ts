@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { WeatherService } from "../../services/weather.service";
 import { Weather } from "../../models/Weather";
@@ -25,7 +25,6 @@ export class CalculateWeatherDtl {
         @Inject(OT_GV) private IGV: IGV,
         public navCtrl: NavController,
         public navParams: NavParams,
-        private loadingCtrl: LoadingController,
         private weatherService: WeatherService,
         public globalFunc: GlobalFunc ) {
         this.resetWeatherDtl();
@@ -45,23 +44,8 @@ export class CalculateWeatherDtl {
         this.weatherDtlList = null;
     }
 
-    loadingPresent() {
-        this.loading = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: `
-                <div class="centerAndMiddle">
-                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
-                </div>`,
-        });
-        this.loading.present();
-    }
-
-    loadingDismiss() {
-        this.loading.dismiss();
-    }
-
     getWeatherDtlList() {
-        this.loadingPresent();
+        this.globalFunc.loadingPresent();
         this.weatherService
             .getWeatherDtlList(this.selectedMonth, this.selectedDay, this.selectedFilterYear)
             .then(result => {
@@ -77,9 +61,9 @@ export class CalculateWeatherDtl {
                     }
                 }
                 this.weatherDtlList = result;
-                this.loadingDismiss();
+                this.globalFunc.loadingDismiss();
             })
-            .catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); }); // TODO: Display error message
+            .catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); }); // TODO: Display error message
 
     }
 

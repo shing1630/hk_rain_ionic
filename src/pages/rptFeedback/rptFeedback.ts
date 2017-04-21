@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
 
 import { OT_GV, IGV } from './../../globalVar/gv';
 import { GlobalFunc } from './../../globalFunc/globalFunc';
@@ -18,38 +17,23 @@ export class RptFeedback {
 
   constructor(
     @Inject(OT_GV) private IGV: IGV,
-    private loadingCtrl: LoadingController,
     public globalFunc: GlobalFunc,
     private feedbackService: FeedbackService) {
   }
 
-  loadingPresent() {
-    this.loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `
-                <div class="centerAndMiddle">
-                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
-                </div>`,
-    });
-    this.loading.present();
-  }
-
-  loadingDismiss() {
-    this.loading.dismiss();
-  }
 
   ngOnInit() {
-    this.loadingPresent();
+    this.globalFunc.loadingPresent();
     this.feedback = new Feedback();
     this.feedback.name = null;
     this.feedback.email = null;
     this.feedback.comment = null;
     this.feedback.submitDate = null;
-    this.loadingDismiss();
+    this.globalFunc.loadingDismiss();
   }
 
   submitFeedback() {
-    this.loadingPresent();
+    this.globalFunc.loadingPresent();
     this.feedbackService
       .checkFeedback(this.feedback)
       .then(response => {
@@ -63,8 +47,8 @@ export class RptFeedback {
         this.feedback.email = null;
         this.feedback.comment = null;
         this.feedback.submitDate = null
-        this.loadingDismiss();
+        this.globalFunc.loadingDismiss();
       })
-      .catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); }); // TODO: Display error message
+      .catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); }); // TODO: Display error message
   }
 }

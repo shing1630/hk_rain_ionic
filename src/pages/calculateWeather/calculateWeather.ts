@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
-import { AdMob, AdMobOptions } from '@ionic-native/admob';
+import { NavController } from 'ionic-angular';
 
 import { Weather } from "../../models/Weather";
 import { ResultWeather } from "../../models/ResultWeather";
@@ -63,12 +62,10 @@ export class CalculateWeather implements OnInit {
 
     constructor(
         @Inject(OT_GV) private IGV: IGV,
-        private loadingCtrl: LoadingController,
         private weatherService: WeatherService,
         private forecastService: ForecastService,
         public navCtrl: NavController,
-        public globalFunc: GlobalFunc,
-        private adMob: AdMob) {
+        public globalFunc: GlobalFunc) {
 
         this.monthMap = IGV.monthMap;
         this.weekDayEnMap = IGV.weekDayEnMap;
@@ -77,41 +74,6 @@ export class CalculateWeather implements OnInit {
         // Set filter year from gloalVar
         this.selectedFilterYear = IGV.filterYear;
 
-    }
-
-    public showInterstitial() {
-        if (!/(android)/i.test(navigator.userAgent)
-            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-            return false;
-        }
-
-        let adInterOptions: AdMobOptions = <AdMobOptions>{};
-
-        adInterOptions = {
-            adId: IGV.AD_MOB_ID_INTER,
-            isTesting: IGV.isTestingAdmob,
-            autoShow: true
-            //adExtras: this.adExtras
-        }
-
-        this.adMob.prepareInterstitial(adInterOptions)
-            .then(() => { this.adMob.showInterstitial(); });
-        return true;
-    }
-
-    loadingPresent() {
-        this.loading = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: `
-                <div class="centerAndMiddle">
-                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
-                </div>`,
-        });
-        this.loading.present();
-    }
-
-    loadingDismiss() {
-        this.loading.dismiss();
     }
 
     resetForm1() {
@@ -276,7 +238,7 @@ export class CalculateWeather implements OnInit {
 
 
     calWeather() {
-        this.loadingPresent();
+        this.globalFunc.loadingPresent();
 
         //check forecast Date
         let isForecast: boolean = false;
@@ -304,9 +266,9 @@ export class CalculateWeather implements OnInit {
                     this.forecast = forecast;
                     this.forecast.weekDay = weekDay;
                     this.showForecast = true;
-                    this.loadingDismiss();
-                    this.showInterstitial();
-                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
+                    this.globalFunc.loadingDismiss();
+                    this.globalFunc.showInterstitial();
+                }).catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); });
         } else {
             this.showForecast = false;
             // calculate weather
@@ -321,14 +283,14 @@ export class CalculateWeather implements OnInit {
 
                     this.weatherResult.weekDay = weekDay;
                     this.showResult = true;
-                    this.loadingDismiss();
-                    this.showInterstitial();
-                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
+                    this.globalFunc.loadingDismiss();
+                    this.globalFunc.showInterstitial();
+                }).catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); });
         }
     }
     calWeather2() {
 
-        this.loadingPresent();
+        this.globalFunc.loadingPresent();
 
         //check forecast Date
         let isForecast2: boolean = false;
@@ -356,8 +318,8 @@ export class CalculateWeather implements OnInit {
                     this.forecast2 = forecast;
                     this.forecast2.weekDay = weekDay;
                     this.showForecast2 = true;
-                    this.loadingDismiss();
-                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
+                    this.globalFunc.loadingDismiss();
+                }).catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); });
         } else {
             this.showForecast2 = false;
             // calculate weather
@@ -372,8 +334,8 @@ export class CalculateWeather implements OnInit {
 
                     this.weatherResult2.weekDay = weekDay;
                     this.showResult2 = true;
-                    this.loadingDismiss();
-                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
+                    this.globalFunc.loadingDismiss();
+                }).catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); });
         }
     }
 

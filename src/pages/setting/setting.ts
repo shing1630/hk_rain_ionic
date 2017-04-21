@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { Storage } from '@ionic/storage';
 
@@ -18,12 +17,11 @@ export class Setting {
 
   constructor(
     @Inject(OT_GV) public IGV: IGV,
-    public loadingCtrl: LoadingController,
     public globalFunc: GlobalFunc,
     public translate: TranslateService,
     public storage: Storage) {
 
-    this.loadingPresent();
+    this.globalFunc.loadingPresent();
     // Set filter year from gloalVar
     this.selectedFilterYear = this.IGV.filterYear;
 
@@ -33,23 +31,9 @@ export class Setting {
       this.selectFilterYearList.push(year);
     }
 
-    this.loadingDismiss();
+    this.globalFunc.loadingDismiss();
   }
 
-  loadingPresent() {
-    this.loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: `
-                <div class="centerAndMiddle">
-                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
-                </div>`,
-    });
-    this.loading.present();
-  }
-
-  loadingDismiss() {
-    this.loading.dismiss();
-  }
 
   changeFilterYear() {
     this.IGV.filterYear = this.selectedFilterYear;
