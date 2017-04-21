@@ -4,7 +4,6 @@
 
 import { Injectable } from '@angular/core';
 
-
 import { Weather } from "../models/Weather";
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';

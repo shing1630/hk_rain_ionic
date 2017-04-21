@@ -48,8 +48,9 @@ export interface IGV {
     ERROR_EN: string;
     ERROR_ZH: string;
     SORRY_SOMETHING_WRONG_EN: string;
-    SORRY_SOMETHING_WRONG_ZN: string;
-    
+    SORRY_SOMETHING_WRONG_ZH: string;
+    NO_NETWORK_CONNECTION_EN: string;
+    NO_NETWORK_CONNECTION_ZH: string;
 
     AD_MOB_ID_BANNER: string;
     AD_MOB_ID_INTER: string;
@@ -115,7 +116,10 @@ export const IGV: IGV = {
     ERROR_EN: 'ERROR!',
     ERROR_ZH: '錯誤!',
     SORRY_SOMETHING_WRONG_EN: 'Sorry, something went wrong...',
-    SORRY_SOMETHING_WRONG_ZN: '抱歉，出了一些問題...',
+    SORRY_SOMETHING_WRONG_ZH: '抱歉，出了一些問題...',
+
+    NO_NETWORK_CONNECTION_EN: 'No Network Connection...',
+    NO_NETWORK_CONNECTION_ZH: '沒有網路...',
 
     AD_MOB_ID_BANNER: '',
     AD_MOB_ID_INTER: ''

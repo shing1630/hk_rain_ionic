@@ -1,11 +1,12 @@
 import { Component, Inject } from '@angular/core';
 
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { WeatherService } from "../../services/weather.service";
 import { Weather } from "../../models/Weather";
 
 import { OT_GV, IGV } from './../../globalVar/gv';
+import { GlobalFunc } from './../../globalFunc/globalFunc';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class CalculateWeatherDtl {
         public navParams: NavParams,
         private loadingCtrl: LoadingController,
         private weatherService: WeatherService,
-        private alertCtrl: AlertController, ) {
+        public globalFunc: GlobalFunc ) {
         this.resetWeatherDtl();
         // If we navigated to this page, we will have an item available as a nav param
         this.selectedMonth = navParams.get('selectedMonth');
@@ -42,33 +43,6 @@ export class CalculateWeatherDtl {
         this.selectedDay = null;
         this.selectedFilterYear = true;
         this.weatherDtlList = null;
-    }
-
-    // -------------  Alert -------------//
-    ppresentSysErr() {
-        if (this.IGV.gLangInd === 'zh') {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_ZH,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
-                buttons: ['OK']
-            });
-            alert.present();
-        } else {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_EN,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
-                buttons: ['OK']
-            });
-            alert.present();
-        }
-    }
-    presentAlert(inputTitle: string, inputSubTitle: string) {
-        let alert = this.alertCtrl.create({
-            title: inputTitle,
-            subTitle: inputSubTitle,
-            buttons: ['OK']
-        });
-        alert.present();
     }
 
     loadingPresent() {
@@ -105,7 +79,7 @@ export class CalculateWeatherDtl {
                 this.weatherDtlList = result;
                 this.loadingDismiss();
             })
-            .catch(error => { this.presentSysErr(); this.loadingDismiss(); }); // TODO: Display error message
+            .catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); }); // TODO: Display error message
 
     }
 

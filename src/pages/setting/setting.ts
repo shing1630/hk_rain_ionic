@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { Storage } from '@ionic/storage';
 
 import { OT_GV, IGV } from './../../globalVar/gv';
-
+import { GlobalFunc } from './../../globalFunc/globalFunc';
 
 @Component({
   selector: 'page-setting',
@@ -19,7 +19,7 @@ export class Setting {
   constructor(
     @Inject(OT_GV) public IGV: IGV,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
+    public globalFunc: GlobalFunc,
     public translate: TranslateService,
     public storage: Storage) {
 
@@ -51,46 +51,19 @@ export class Setting {
     this.loading.dismiss();
   }
 
-  // -------------  Alert -------------//
-  presentSysErr() {
-        if (this.IGV.gLangInd === 'zh') {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_ZH,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
-                buttons: ['OK']
-            });
-            alert.present();
-        } else {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_EN,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
-                buttons: ['OK']
-            });
-            alert.present();
-        }
-    }
-  presentAlert(inputTitle: string, inputSubTitle: string) {
-    let alert = this.alertCtrl.create({
-      title: inputTitle,
-      subTitle: inputSubTitle,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
   changeFilterYear() {
     this.IGV.filterYear = this.selectedFilterYear;
 
     this.storage.ready().then(() => {
       this.storage.set('mySetting', { langInd: this.IGV.gLangInd, filterYear: this.IGV.filterYear });
     }, (error) => {
-      this.presentSysErr();
+      this.globalFunc.presentSysErr();
     });
 
     if (this.IGV.gLangInd === 'en') {
-      this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_EN, this.IGV.NO_OF_YEARS_CHANGED_TO_EN + this.selectedFilterYear);
+      this.globalFunc.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_EN, this.IGV.NO_OF_YEARS_CHANGED_TO_EN + this.selectedFilterYear);
     } else {
-      this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_ZH, this.IGV.NO_OF_YEARS_CHANGED_TO_ZH + this.selectedFilterYear);
+      this.globalFunc.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_ZH, this.IGV.NO_OF_YEARS_CHANGED_TO_ZH + this.selectedFilterYear);
     }
   }
 

@@ -1,12 +1,14 @@
 
 import { Component, ViewChild, Inject } from '@angular/core';
-import { Platform, MenuController, Nav, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, MenuController, Nav, LoadingController } from 'ionic-angular';
 import { TranslateService } from 'ng2-translate';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { AdMob, AdMobOptions } from '@ionic-native/admob';
+import { Network } from '@ionic-native/network';
 
 import { OT_GV, IGV } from './../globalVar/gv';
+import { GlobalFunc } from './../globalFunc/globalFunc';
 
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { RptFeedback } from '../pages/rptFeedback/rptFeedback';
@@ -29,12 +31,13 @@ export class MyApp {
   constructor(
     @Inject(OT_GV) public IGV: IGV,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
     public platform: Platform,
     public menu: MenuController,
     public translate: TranslateService,
     public storage: Storage,
-    public adMob: AdMob
+    public adMob: AdMob,
+    public globalFunc: GlobalFunc,
+    public network: Network
   ) {
     this.initializeApp(translate);
   }
@@ -53,25 +56,6 @@ export class MyApp {
   loadingDismiss() {
     this.loading.dismiss();
   }
-
-  // -------------  Alert -------------//
-  presentSysErr() {
-        if (this.IGV.gLangInd === 'zh') {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_ZH,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
-                buttons: ['OK']
-            });
-            alert.present();
-        } else {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_EN,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
-                buttons: ['OK']
-            });
-            alert.present();
-        }
-    }
 
   initializeApp(translate) {
     this.loadingPresent();
@@ -99,15 +83,18 @@ export class MyApp {
             this.storage.set('mySetting', { langInd: 'zh', filterYear: 45 });
           }
 
+          // watch network for a disconnect
+          let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+            this.globalFunc.showToastNoNetwork();
+          });
+
         });
       }, (error) => {
-        this.presentSysErr();
+        this.globalFunc.presentSysErr();
       });
 
       // For adMob
-
       this.initAds();
-
 
     });
   }
@@ -137,7 +124,7 @@ export class MyApp {
 
   public showBanner() {
     if (!/(android)/i.test(navigator.userAgent)
-        && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+      && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
       return false;
     }
 
@@ -158,7 +145,7 @@ export class MyApp {
 
   public showInterstitial() {
     if (!/(android)/i.test(navigator.userAgent)
-        && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+      && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
       return false;
     }
 
@@ -175,6 +162,7 @@ export class MyApp {
       .then(() => { this.adMob.showInterstitial(); });
     return true;
   }
+
 
 
   openPage(page) {
@@ -218,7 +206,7 @@ export class MyApp {
     this.storage.ready().then(() => {
       this.storage.set('mySetting', { langInd: lang, filterYear: this.IGV.filterYear });
     }, (error) => {
-      this.presentSysErr();
+      this.globalFunc.presentSysErr();
     });
 
     this.menu.close();

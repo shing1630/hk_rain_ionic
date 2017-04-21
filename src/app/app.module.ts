@@ -13,7 +13,9 @@ import { WeatherService } from '../services/weather.service';
 import { FeedbackService } from '../services/feedback.service';
 import { OT_GV, IGV } from './../globalVar/gv';
 import { IonicStorageModule } from '@ionic/storage';
+import { Network } from '@ionic-native/network';
 import { AdMob } from '@ionic-native/admob';
+import { GlobalFunc } from './../globalFunc/globalFunc';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
 @NgModule({
@@ -54,7 +56,9 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     ForecastService,
     WeatherService,
     FeedbackService,
-    AdMob
+    AdMob,
+    GlobalFunc,
+    Network
   ]
 })
 export class AppModule { }

@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 import { OT_GV, IGV } from './../../globalVar/gv';
+import { GlobalFunc } from './../../globalFunc/globalFunc';
 
 import { Forecast } from "../../models/Forecast";
 import { ForecastService } from "../../services/forecast.service";
@@ -23,7 +24,7 @@ export class WeatherForecast {
   constructor(
     @Inject(OT_GV) private IGV: IGV,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
+    public globalFunc: GlobalFunc,
     private forecastService: ForecastService) {
     this.monthMap = IGV.monthMap;
     this.weekDayEnMap = IGV.weekDayEnMap;
@@ -45,25 +46,6 @@ export class WeatherForecast {
     this.loading.dismiss();
   }
 
-  // -------------  Alert -------------//
-  presentSysErr() {
-        if (this.IGV.gLangInd === 'zh') {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_ZH,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
-                buttons: ['OK']
-            });
-            alert.present();
-        } else {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_EN,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
-                buttons: ['OK']
-            });
-            alert.present();
-        }
-    }
-
   ngOnInit() {
     this.loadingPresent();
     this.forecastService.getForecast()
@@ -82,7 +64,7 @@ export class WeatherForecast {
           }
         }
         this.loadingDismiss();
-      }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
+      }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
   }
 
   refreshForecast(refresher) {
@@ -102,6 +84,6 @@ export class WeatherForecast {
           }
         }
         refresher.complete();
-      }).catch(error => { this.presentSysErr(); refresher.complete(); });
+      }).catch(error => { this.globalFunc.presentSysErr(); refresher.complete(); });
   }
 }

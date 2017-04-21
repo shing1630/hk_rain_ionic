@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { AdMob, AdMobOptions } from '@ionic-native/admob';
 
 import { Weather } from "../../models/Weather";
@@ -9,6 +9,7 @@ import { WeatherService } from "../../services/weather.service";
 import { ForecastService } from "../../services/forecast.service";
 import { CalculateWeatherDtl } from "../../pages/calculateWeather/CalculateWeatherDtl";
 import { OT_GV, IGV } from './../../globalVar/gv';
+import { GlobalFunc } from './../../globalFunc/globalFunc';
 
 @Component({
     selector: 'my-calculateWeather',
@@ -63,10 +64,10 @@ export class CalculateWeather implements OnInit {
     constructor(
         @Inject(OT_GV) private IGV: IGV,
         private loadingCtrl: LoadingController,
-        private alertCtrl: AlertController,
         private weatherService: WeatherService,
         private forecastService: ForecastService,
         public navCtrl: NavController,
+        public globalFunc: GlobalFunc,
         private adMob: AdMob) {
 
         this.monthMap = IGV.monthMap;
@@ -185,34 +186,6 @@ export class CalculateWeather implements OnInit {
 
     }
 
-    // -------------  Alert -------------//
-    presentSysErr() {
-        if (this.IGV.gLangInd === 'zh') {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_ZH,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
-                buttons: ['OK']
-            });
-            alert.present();
-        } else {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_EN,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
-                buttons: ['OK']
-            });
-            alert.present();
-        }
-    }
-
-    presentAlert(inputTitle: string, inputSubTitle: string) {
-        let alert = this.alertCtrl.create({
-            title: inputTitle,
-            subTitle: inputSubTitle,
-            buttons: ['OK']
-        });
-        alert.present();
-    }
-
     // ------------- Component Change -------------//
     yearChange() {
         this.selectedMonth = null;
@@ -303,7 +276,6 @@ export class CalculateWeather implements OnInit {
 
 
     calWeather() {
-        this.presentSysErr();
         this.loadingPresent();
 
         //check forecast Date
@@ -334,7 +306,7 @@ export class CalculateWeather implements OnInit {
                     this.showForecast = true;
                     this.loadingDismiss();
                     this.showInterstitial();
-                }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
+                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
         } else {
             this.showForecast = false;
             // calculate weather
@@ -351,7 +323,7 @@ export class CalculateWeather implements OnInit {
                     this.showResult = true;
                     this.loadingDismiss();
                     this.showInterstitial();
-                }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
+                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
         }
     }
     calWeather2() {
@@ -385,7 +357,7 @@ export class CalculateWeather implements OnInit {
                     this.forecast2.weekDay = weekDay;
                     this.showForecast2 = true;
                     this.loadingDismiss();
-                }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
+                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
         } else {
             this.showForecast2 = false;
             // calculate weather
@@ -401,7 +373,7 @@ export class CalculateWeather implements OnInit {
                     this.weatherResult2.weekDay = weekDay;
                     this.showResult2 = true;
                     this.loadingDismiss();
-                }).catch(error => { this.presentSysErr(); this.loadingDismiss(); });
+                }).catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); });
         }
     }
 

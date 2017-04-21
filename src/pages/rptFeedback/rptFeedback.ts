@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 import { OT_GV, IGV } from './../../globalVar/gv';
+import { GlobalFunc } from './../../globalFunc/globalFunc';
 
 import { Feedback } from "../../models/Feedback";
 import { FeedbackService } from "../../services/feedback.service";
@@ -18,7 +19,7 @@ export class RptFeedback {
   constructor(
     @Inject(OT_GV) private IGV: IGV,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
+    public globalFunc: GlobalFunc,
     private feedbackService: FeedbackService) {
   }
 
@@ -37,33 +38,6 @@ export class RptFeedback {
     this.loading.dismiss();
   }
 
-  // -------------  Alert -------------//
-  presentSysErr() {
-        if (this.IGV.gLangInd === 'zh') {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_ZH,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
-                buttons: ['OK']
-            });
-            alert.present();
-        } else {
-            let alert = this.alertCtrl.create({
-                title: IGV.ERROR_EN,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
-                buttons: ['OK']
-            });
-            alert.present();
-        }
-    }
-  presentAlert(inputTitle: string, inputSubTitle: string) {
-    let alert = this.alertCtrl.create({
-      title: inputTitle,
-      subTitle: inputSubTitle,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
-
   ngOnInit() {
     this.loadingPresent();
     this.feedback = new Feedback();
@@ -80,9 +54,9 @@ export class RptFeedback {
       .checkFeedback(this.feedback)
       .then(response => {
         if (this.IGV.gLangInd === 'en') {
-          this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_EN, null);
+          this.globalFunc.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_EN, null);
         } else {
-          this.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_ZH, null);
+          this.globalFunc.presentAlert(this.IGV.SUBMITTED_SUCCESSFULLY_ZH, null);
         }
         this.feedback = new Feedback();
         this.feedback.name = null;
@@ -91,6 +65,6 @@ export class RptFeedback {
         this.feedback.submitDate = null
         this.loadingDismiss();
       })
-      .catch(error => { this.presentSysErr(); this.loadingDismiss(); }); // TODO: Display error message
+      .catch(error => { this.globalFunc.presentSysErr(); this.loadingDismiss(); }); // TODO: Display error message
   }
 }
