@@ -3,6 +3,7 @@ import { OpaqueToken } from '@angular/core';
 export let OT_GV = new OpaqueToken('gv');
 
 export interface IGV {
+    isTestingAdmob: boolean;
     gLangInd: string;
     monthMap: {};
     weekDayEnMap: {};
@@ -48,6 +49,11 @@ export interface IGV {
 }
 
 export const IGV: IGV = {
+
+    // Change it to true when production
+    isTestingAdmob: true,
+    // Change it to true when production
+    
     gLangInd: 'ZH',
     monthMap: {
         1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May',

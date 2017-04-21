@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NavController, LoadingController, AlertController } from 'ionic-angular';
-import { AdMob } from '@ionic-native/admob';
+import { AdMob, AdMobOptions } from '@ionic-native/admob';
 
 import { Weather } from "../../models/Weather";
 import { ResultWeather } from "../../models/ResultWeather";
@@ -80,8 +80,18 @@ export class CalculateWeather implements OnInit {
 
     public showInterstitial() {
         if (!this.adMob) return false;
-        this.adMob.prepareInterstitial({ adId: IGV.AD_MOB_ID_INTER });
-        this.adMob.showInterstitial();
+
+        let adInterOptions: AdMobOptions = <AdMobOptions>{};
+
+        adInterOptions = {
+            adId: IGV.AD_MOB_ID_INTER,
+            isTesting: IGV.isTestingAdmob,
+            autoShow: true
+            //adExtras: this.adExtras
+        }
+
+        this.adMob.prepareInterstitial(adInterOptions)
+            .then(() => { this.adMob.showInterstitial(); });
         return true;
     }
 

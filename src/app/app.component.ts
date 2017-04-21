@@ -26,12 +26,6 @@ export class MyApp {
 
   loading: any;
 
-  private adMobId: any;
-  private adOptions: AdMobOptions = <AdMobOptions>{};
-
-  // Change it to true when production
-  private isTesting: boolean = true;
-
   constructor(
     @Inject(OT_GV) public IGV: IGV,
     public loadingCtrl: LoadingController,
@@ -115,55 +109,55 @@ export class MyApp {
       return;
     }
     this.setAdMobIds();
-    this.setAdMobOptions();
     this.showBanner();
     this.showInterstitial();
   }
 
   private setAdMobIds() {
     if (/(android)/i.test(navigator.userAgent)) {
-      this.adMobId = {
-        banner: 'ca-app-pub-7668464781725150/1638150628',
-        interstitial: 'ca-app-pub-7668464781725150/8044611026'
-      };
       IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/1638150628';
       IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/8044611026';
     } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-      this.adMobId = {
-        banner: 'ca-app-pub-7668464781725150/6068350226',
-        interstitial: 'ca-app-pub-7668464781725150/6428277028'
-      };
       IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/6068350226';
       IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/6428277028';
     } else {
-      this.adMobId = {
-        banner: ''
-      };
+      IGV.AD_MOB_ID_BANNER = '';
+      IGV.AD_MOB_ID_INTER = '';
     }
-  }
-
-  private setAdMobOptions() {
-    this.adOptions = {
-      position: this.adMob.AD_POSITION.BOTTOM_CENTER,
-      isTesting: this.isTesting,
-      autoShow: true
-      //adExtras: this.adExtras
-    }
-
-    this.adMob.setOptions(this.adOptions)
   }
 
   public showBanner() {
     if (!this.adMob) return false;
 
-    this.adMob.createBanner({ adId: this.adMobId.banner });
+    let adBannerOptions: AdMobOptions = <AdMobOptions>{};
+
+    adBannerOptions = {
+      adId: IGV.AD_MOB_ID_BANNER,
+      position: this.adMob.AD_POSITION.BOTTOM_CENTER,
+      isTesting: IGV.isTestingAdmob,
+      autoShow: true
+      //adExtras: this.adExtras
+    }
+
+    this.adMob.createBanner(adBannerOptions);
+
     return true;
   }
 
   public showInterstitial() {
     if (!this.adMob) return false;
-    this.adMob.prepareInterstitial({ adId: this.adMobId.interstitial });
-    this.adMob.showInterstitial();
+    
+    let adInterOptions: AdMobOptions = <AdMobOptions>{};
+
+    adInterOptions = {
+      adId: IGV.AD_MOB_ID_INTER,
+      isTesting: IGV.isTestingAdmob,
+      autoShow: true
+      //adExtras: this.adExtras
+    }
+
+    this.adMob.prepareInterstitial(adInterOptions)
+    .then(() => { this.adMob.showInterstitial(); });
     return true;
   }
 
