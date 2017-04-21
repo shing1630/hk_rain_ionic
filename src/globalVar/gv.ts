@@ -39,10 +39,17 @@ export interface IGV {
     TORRENTIAL_THRESHOLD: number;
     S0001: string;
     S0002: string;
+
+    // Lange
     NO_OF_YEARS_CHANGED_TO_EN: string;
     NO_OF_YEARS_CHANGED_TO_ZH: string;
     SUBMITTED_SUCCESSFULLY_EN: string;
     SUBMITTED_SUCCESSFULLY_ZH: string;
+    ERROR_EN: string;
+    ERROR_ZH: string;
+    SORRY_SOMETHING_WRONG_EN: string;
+    SORRY_SOMETHING_WRONG_ZN: string;
+    
 
     AD_MOB_ID_BANNER: string;
     AD_MOB_ID_INTER: string;
@@ -54,7 +61,7 @@ export const IGV: IGV = {
     isTestingAdmob: true,
     // Change it to true when production
     
-    gLangInd: 'ZH',
+    gLangInd: 'zh',
     monthMap: {
         1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May',
         6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sept', 10: 'Oct', 11: 'Nov', 12: 'Dec'
@@ -98,10 +105,17 @@ export const IGV: IGV = {
     TORRENTIAL_THRESHOLD: 100,
     S0001: 'S0001:',
     S0002: 'S0002:',
+
+    // Lang
     NO_OF_YEARS_CHANGED_TO_EN: 'No of years changed to',
     NO_OF_YEARS_CHANGED_TO_ZH: '年數改變至',
     SUBMITTED_SUCCESSFULLY_EN: 'Submitted successfully!',
     SUBMITTED_SUCCESSFULLY_ZH: '成功遞交!',
+
+    ERROR_EN: 'ERROR!',
+    ERROR_ZH: '錯誤!',
+    SORRY_SOMETHING_WRONG_EN: 'Sorry, something went wrong...',
+    SORRY_SOMETHING_WRONG_ZN: '抱歉，出了一些問題...',
 
     AD_MOB_ID_BANNER: '',
     AD_MOB_ID_INTER: ''

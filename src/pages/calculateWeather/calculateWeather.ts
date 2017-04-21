@@ -79,7 +79,10 @@ export class CalculateWeather implements OnInit {
     }
 
     public showInterstitial() {
-        if (!this.adMob) return false;
+        if (!/(android)/i.test(navigator.userAgent)
+            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+            return false;
+        }
 
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
@@ -184,13 +187,23 @@ export class CalculateWeather implements OnInit {
 
     // -------------  Alert -------------//
     presentSysErr() {
-        let alert = this.alertCtrl.create({
-            title: '錯誤! ERROR!',
-            subTitle: '抱歉，出了一些問題... Sorry, something went wrong...',
-            buttons: ['OK']
-        });
-        alert.present();
+        if (this.IGV.gLangInd === 'zh') {
+            let alert = this.alertCtrl.create({
+                title: IGV.ERROR_ZH,
+                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
+                buttons: ['OK']
+            });
+            alert.present();
+        } else {
+            let alert = this.alertCtrl.create({
+                title: IGV.ERROR_EN,
+                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
+                buttons: ['OK']
+            });
+            alert.present();
+        }
     }
+
     presentAlert(inputTitle: string, inputSubTitle: string) {
         let alert = this.alertCtrl.create({
             title: inputTitle,
@@ -290,7 +303,7 @@ export class CalculateWeather implements OnInit {
 
 
     calWeather() {
-
+        this.presentSysErr();
         this.loadingPresent();
 
         //check forecast Date

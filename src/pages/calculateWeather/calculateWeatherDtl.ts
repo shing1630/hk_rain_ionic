@@ -45,13 +45,22 @@ export class CalculateWeatherDtl {
     }
 
     // -------------  Alert -------------//
-    presentSysErr() {
-        let alert = this.alertCtrl.create({
-            title: '錯誤! ERROR!',
-            subTitle: '抱歉，出了一些問題... Sorry, something went wrong...',
-            buttons: ['OK']
-        });
-        alert.present();
+    ppresentSysErr() {
+        if (this.IGV.gLangInd === 'zh') {
+            let alert = this.alertCtrl.create({
+                title: IGV.ERROR_ZH,
+                subTitle: IGV.SORRY_SOMETHING_WRONG_ZN,
+                buttons: ['OK']
+            });
+            alert.present();
+        } else {
+            let alert = this.alertCtrl.create({
+                title: IGV.ERROR_EN,
+                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
+                buttons: ['OK']
+            });
+            alert.present();
+        }
     }
     presentAlert(inputTitle: string, inputSubTitle: string) {
         let alert = this.alertCtrl.create({
