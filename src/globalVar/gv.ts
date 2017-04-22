@@ -59,7 +59,7 @@ export interface IGV {
 export const IGV: IGV = {
 
     // Change it to true when production
-    isTestingAdmob: true,
+    isTestingAdmob: false,
     // Change it to true when production
     
     gLangInd: 'zh',
