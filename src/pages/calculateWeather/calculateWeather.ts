@@ -194,7 +194,11 @@ export class CalculateWeather implements OnInit {
     getSelectMonthList(selectYear: number) {
         let monthList = [];
         let currDate = new Date();
-        if (Number(currDate.getFullYear()) !== selectYear) {
+        if (typeof selectYear === 'string') {
+            selectYear = Number(selectYear);
+        }
+        if (currDate.getFullYear() !== selectYear) {
+            console.log('all ');
             for (var i = 1; i <= 12; i++) {
                 var month = { value: i, label: i };
                 monthList.push(month);
@@ -214,6 +218,13 @@ export class CalculateWeather implements OnInit {
         let currDate = new Date();
         let currYear = Number(currDate.getFullYear());
         let currMonth: number = Number(currDate.getMonth()) + 1;
+
+        if (typeof selectYear === 'string') {
+            selectYear = Number(selectYear);
+        }
+        if (typeof selectMonth === 'string') {
+            selectMonth = Number(selectMonth);
+        }
 
         if (currYear === selectYear && currMonth === selectMonth) {
             let currDay: number = Number(currDate.getDate());
@@ -238,6 +249,7 @@ export class CalculateWeather implements OnInit {
 
 
     calWeather() {
+        this.globalFunc.removeBanner();
         this.globalFunc.loadingPresent();
 
         //check forecast Date
@@ -289,7 +301,7 @@ export class CalculateWeather implements OnInit {
         }
     }
     calWeather2() {
-
+        this.globalFunc.removeBanner();
         this.globalFunc.loadingPresent();
 
         //check forecast Date

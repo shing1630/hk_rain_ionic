@@ -4,6 +4,8 @@ export let OT_GV = new OpaqueToken('gv');
 
 export interface IGV {
     isTestingAdmob: boolean;
+    ADMOB_MAX_NUMBER: number;
+    admobCount: number;
     gLangInd: string;
     monthMap: {};
     weekDayEnMap: {};
@@ -61,6 +63,9 @@ export const IGV: IGV = {
     // Change it to true when production
     isTestingAdmob: false,
     // Change it to true when production
+
+    ADMOB_MAX_NUMBER: 3,
+    admobCount: 3,
     
     gLangInd: 'zh',
     monthMap: {

@@ -34,7 +34,7 @@ $basicColor: #007ACC;
   color: white;
 }
 
-.list-md .item-block .item-inner {
+.list-md .item-block .item-inner, .list-ios .item-block .item-inner {
   border-bottom: 0;
 }
 
@@ -200,6 +200,11 @@ a:hover, a:active, a:focus {
 .paddingBottomTo7{
 	padding-bottom: 7px;
 }
+
+.paddingTo5{
+	padding:5px;
+}
+
 
 .paddingTo10{
 	padding:10px;

@@ -103,9 +103,19 @@ export class GlobalFunc {
         return true;
     }
 
+    public removeBanner() {
+        this.adMob.removeBanner();
+        return true;
+    }
+
     public showInterstitial() {
         if (!/(android)/i.test(navigator.userAgent)
             && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+            return false;
+        }
+
+        if (this.IGV.admobCount > 0) {
+            this.IGV.admobCount--;
             return false;
         }
 
@@ -119,7 +129,7 @@ export class GlobalFunc {
         }
 
         this.adMob.prepareInterstitial(adInterOptions)
-            .then(() => { this.adMob.showInterstitial(); });
+            .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
         return true;
     }
 

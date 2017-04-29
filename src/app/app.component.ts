@@ -87,10 +87,12 @@ export class MyApp {
     switch (page) {
       case 'WeatherForecast': {
         toPage = WeatherForecast;
+        this.globalFunc.removeBanner();
         break;
       }
       case 'CalculateWeather': {
         toPage = CalculateWeather;
+        this.globalFunc.showBanner();
         break;
       }
       case 'Setting': {

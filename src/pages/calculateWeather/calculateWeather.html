@@ -46,12 +46,12 @@
             <ion-row>
                 <ion-col col-12>
                     <div *ngIf="showForecast" class="subComponent">
-                        <div class="centerAndMiddle">
+                        <div class="centerAndMiddle paddingTo5">
                             <div class="form-group">
                                 <p class="fontLarge colorToWarning"><strong>{{'CW.FORECASR_EXPLAIN' | translate}}</strong></p>
                             </div>
                         </div>
-                        <div class="centerAndMiddle paddingTo10">
+                        <div class="centerAndMiddle paddingTo5">
                             <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast.day}} {{monthMap[forecast.month]}} ( {{weekDayEnMap[forecast.weekDay]}} ) </strong></p>
                             <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast.month}} {{'CW.MONTH' | translate}} {{forecast.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[forecast.weekDay]}} )</strong></p>
                             <hr style="border-top: 3px solid #eee; margin-top: 0px;" />
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div *ngIf="showResult" class="subComponent">
-                        <div class="centerAndMiddle paddingTo10">
+                        <div class="centerAndMiddle paddingTo5">
                             <label *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{weatherResult.day}} {{monthMap[weatherResult.month]}} {{weatherResult.year}} ( {{weekDayEnMap[weatherResult.weekDay]}} )</label>
                             <label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
@@ -185,13 +185,13 @@
                 <ion-col col-12>
                     <div *ngIf="showForecast2" class="subComponent">
                         <div *ngIf="showForecast2" class="mainComponent">
-                            <div class="centerAndMiddle">
+                            <div class="centerAndMiddle paddingTo5">
                                 <div class="form-group">
                                     <p class="fontLarge colorToWarning"><strong>{{'CW.FORECASR_EXPLAIN' | translate}}</strong></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="centerAndMiddle paddingTo10">
+                        <div class="centerAndMiddle paddingTo5">
                             <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{forecast2.day}} {{monthMap[forecast2.month]}} ( {{weekDayEnMap[forecast2.weekDay]}} ) </strong></p>
                             <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast2.month}} {{'CW.MONTH' | translate}} {{forecast2.day}} {{'CW.DAY' | translate}} ( {{weekDayZhMap[forecast2.weekDay]}} )</strong></p>
                             <hr style="border-top: 3px solid #eee; margin-top: 0px;" />
@@ -200,9 +200,14 @@
                             <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{forecast2.desc_zh}}</strong></p>
 
                         </div>
+                        <div class="centerAndMiddle subComponent">
+                            <button ion-button type="button" full color="secondary" (click)="backToCal2();">
+								{{ 'CW.BACK' | translate }}
+							</button>
+                        </div>
                     </div>
                     <div *ngIf="showResult2" class="subComponent">
-                        <div class="centerAndMiddle paddingTo10">
+                        <div class="centerAndMiddle paddingTo5">
                             <label *ngIf="IGV.gLangInd === 'en'" class="centerAndMiddle fontLarge paddingBottomTo7">
                                     {{weatherResult2.day}} {{monthMap[weatherResult2.month]}} {{weatherResult2.year}} ( {{weekDayEnMap[weatherResult2.weekDay]}} )</label>
                             <label *ngIf="IGV.gLangInd === 'zh'" class="centerAndMiddle fontLarge paddingBottomTo7">
