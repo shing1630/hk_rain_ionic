@@ -11,6 +11,7 @@ import { GlobalFunc } from './../globalFunc/globalFunc';
 
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { RptFeedback } from '../pages/rptFeedback/rptFeedback';
+import { SupportPage } from '../pages/support/support';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { Setting } from '../pages/setting/setting';
 import { About } from '../pages/about/about';
@@ -105,6 +106,10 @@ export class MyApp {
       }
       case 'RptFeedback': {
         toPage = RptFeedback;
+        break;
+      }
+      case 'Support': {
+        toPage = SupportPage;
         break;
       }
       default: {

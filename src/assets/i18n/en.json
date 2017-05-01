@@ -10,7 +10,8 @@
     "SETTING": "Setting",
     "EMPTY": "Empty",
     "ABOUT": "About",
-    "FEEDBACK": "Feedback"
+    "FEEDBACK": "Feedback",
+    "SUPPORT": "Support"
   },  
   "AB": {
     "P1": "Planning for an outdoor activity but worry about the weather? Do you want to know the possibility of rain on a particular day?",
@@ -62,5 +63,14 @@
     "EMAIL": "Email (Optional)",
     "COMMENT": "Comment",
     "SUBMIT": "Submit"
+  },  
+   "SUPPORT": {
+    "THANKS": "Thank you!",
+    "CHECK_UPDATE_IN_APP_STORE": "Check update in App Store", 
+    "CHECK_UPDATE_IN_GOOGLE_PLAY": "Check update in Google Play", 
+    "PLEASE_RATE": "Please rate and comment this app now.",
+    "ALSO_YOU_CAN_SUPPORT_ME_BY": "Also, you can support me by",
+    "WATCH_NORMAL_ADV": "Watch normal adv",
+    "WATCH_VIDEO_ADV": "Watch video adv"
   }
 }

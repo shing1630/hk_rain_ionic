@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { AdMob, AdMobOptions } from '@ionic-native/admob';
+import { Market } from '@ionic-native/market';
 import { OT_GV, IGV } from './../globalVar/gv';
 
 @Injectable()
@@ -13,8 +14,14 @@ export class GlobalFunc {
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public adMob: AdMob,
+        private market: Market,
         private toastCtrl: ToastController) { }
 
+
+    // Open app store / market
+    openMarket(appStoreID: string) {
+        this.market.open(appStoreID);
+    }
     // -------------  Alert -------------//
     presentSysErr() {
         if (this.IGV.gLangInd === 'zh') {
@@ -73,9 +80,11 @@ export class GlobalFunc {
         if (/(android)/i.test(navigator.userAgent)) {
             IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/1638150628';
             IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/8044611026';
+            IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/9590442629';
         } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
             IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/6068350226';
             IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/6428277028';
+            IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/8113709427';
         } else {
             IGV.AD_MOB_ID_BANNER = '';
             IGV.AD_MOB_ID_INTER = '';
@@ -130,6 +139,46 @@ export class GlobalFunc {
 
         this.adMob.prepareInterstitial(adInterOptions)
             .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
+        return true;
+    }
+
+        public showInterstitialImmd() {
+        if (!/(android)/i.test(navigator.userAgent)
+            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+            return false;
+        }
+
+        let adInterOptions: AdMobOptions = <AdMobOptions>{};
+
+        adInterOptions = {
+            adId: this.IGV.AD_MOB_ID_INTER,
+            isTesting: this.IGV.isTestingAdmob,
+            autoShow: true
+            //adExtras: this.adExtras
+        }
+
+        this.adMob.prepareInterstitial(adInterOptions)
+            .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
+        return true;
+    }
+
+    public showRewardVideoAd() {
+        if (!/(android)/i.test(navigator.userAgent)
+            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+            return false;
+        }
+        
+        let adInterOptions: AdMobOptions = <AdMobOptions>{};
+
+        adInterOptions = {
+            adId: this.IGV.AD_MOB_ID_VIDEO,
+            isTesting: this.IGV.isTestingAdmob,
+            autoShow: true
+            //adExtras: this.adExtras
+        }
+
+        this.adMob.prepareRewardVideoAd(adInterOptions)
+            .then(() => { this.adMob.showRewardVideoAd(); });
         return true;
     }
 

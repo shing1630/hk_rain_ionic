@@ -56,16 +56,17 @@ export interface IGV {
 
     AD_MOB_ID_BANNER: string;
     AD_MOB_ID_INTER: string;
+    AD_MOB_ID_VIDEO: string;
 }
 
 export const IGV: IGV = {
 
     // Change it to true when production
-    isTestingAdmob: false,
+    isTestingAdmob: true,
     // Change it to true when production
 
-    ADMOB_MAX_NUMBER: 3,
-    admobCount: 3,
+    ADMOB_MAX_NUMBER: 5,
+    admobCount: 5,
     
     gLangInd: 'zh',
     monthMap: {
@@ -127,6 +128,7 @@ export const IGV: IGV = {
     NO_NETWORK_CONNECTION_ZH: '沒有網路...',
 
     AD_MOB_ID_BANNER: '',
-    AD_MOB_ID_INTER: ''
+    AD_MOB_ID_INTER: '',
+    AD_MOB_ID_VIDEO: ''
 };
 

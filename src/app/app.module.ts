@@ -8,6 +8,7 @@ import { CalculateWeatherDtl } from '../pages/calculateWeather/CalculateWeatherD
 import { Setting } from '../pages/setting/setting';
 import { About } from '../pages/about/about';
 import { RptFeedback } from '../pages/rptFeedback/rptFeedback';
+import { SupportPage } from '../pages/support/support';
 import { ForecastService } from '../services/forecast.service';
 import { WeatherService } from '../services/weather.service';
 import { FeedbackService } from '../services/feedback.service';
@@ -16,6 +17,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
 import { AdMob } from '@ionic-native/admob';
 import { GlobalFunc } from './../globalFunc/globalFunc';
+import { AppRate } from '@ionic-native/app-rate';
+import { Market } from '@ionic-native/market';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
 @NgModule({
@@ -26,7 +29,8 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     CalculateWeatherDtl,
     Setting,
     About,
-    RptFeedback
+    RptFeedback,
+    SupportPage
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -48,7 +52,8 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     CalculateWeatherDtl,
     Setting,
     About,
-    RptFeedback
+    RptFeedback,
+    SupportPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -56,6 +61,8 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     ForecastService,
     WeatherService,
     FeedbackService,
+    AppRate,
+    Market,
     AdMob,
     GlobalFunc,
     Network
