@@ -75,8 +75,13 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 class="centerAndMiddle">
-        <button ion-button (click)="showRewardVideoAd()" style="min-width: 170px; min-height:50px; max-width: 170px; max-height:50px">
+        <button *ngIf="isAndroid" ion-button (click)="showRewardVideoAd()" style="min-width: 170px; min-height:50px; max-width: 170px; max-height:50px">
             {{ 'SUPPORT.WATCH_VIDEO_ADV' | translate }}
+        </button>
+        <button *ngIf="isIOS" ion-button (click)="showInterstitialImmd()" style="min-width: 170px; min-height:50px; max-width: 170px; max-height:50px">
+          <div class="centerAndMiddle">
+             {{ 'SUPPORT.WATCH_NORMAL_ADV' | translate }}
+          </div>
         </button>
       </ion-col>
     </ion-row>
