@@ -20,15 +20,20 @@
     <ion-row>
       <ion-col col-12 class="centerAndMiddle">
         <div class="centerAndMiddle fontToBold">
-          {{ 'SUPPORT.CHECK_UPDATE_IN_APP_STORE' | translate }}
+          1{{ 'SUPPORT.CHECK_UPDATE_IN_APP_STORE' | translate }}
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-12 class="centerAndMiddle">
-        <button ion-button (click)="openAppStore()" style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
+        <button *ngIf="isAndroid" ion-button (click)="openAppStore()" style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
           <ion-icon name="code-download"></ion-icon>
         </button>
+        <a href="https://appsto.re/hk/zMbVib.i">
+          <button *ngIf="isIOS" ion-button style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
+            <ion-icon name="code-download"></ion-icon>
+          </button>
+        </a> 
       </ion-col>
     </ion-row>
 
@@ -41,9 +46,14 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 class="centerAndMiddle">
-        <button ion-button (click)="openStoreRate()" style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
+        <button *ngIf="isAndroid" ion-button (click)="openStoreRate()" style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
           <ion-icon name="appstore"></ion-icon>
         </button>
+        <a href="https://appsto.re/hk/zMbVib.i">
+          <button *ngIf="isIOS" ion-button style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
+            <ion-icon name="appstore"></ion-icon>
+          </button>
+        </a>
       </ion-col>
     </ion-row>
 

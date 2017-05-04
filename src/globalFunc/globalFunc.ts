@@ -24,7 +24,7 @@ export class GlobalFunc {
     }
     // -------------  Alert -------------//
     presentSysErr() {
-        if (this.IGV.gLangInd === 'zh') {
+        if (IGV.gLangInd === 'zh') {
             let alert = this.alertCtrl.create({
                 title: IGV.ERROR_ZH,
                 subTitle: IGV.SORRY_SOMETHING_WRONG_ZH,
@@ -123,8 +123,8 @@ export class GlobalFunc {
             return false;
         }
 
-        if (this.IGV.admobCount > 0) {
-            this.IGV.admobCount--;
+        if (IGV.admobCount > 0) {
+            IGV.admobCount--;
             return false;
         }
 
@@ -138,7 +138,7 @@ export class GlobalFunc {
         }
 
         this.adMob.prepareInterstitial(adInterOptions)
-            .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
+            .then(() => { this.adMob.showInterstitial(); IGV.admobCount = IGV.ADMOB_MAX_NUMBER });
         return true;
     }
 
@@ -151,18 +151,21 @@ export class GlobalFunc {
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
         adInterOptions = {
-            adId: this.IGV.AD_MOB_ID_INTER,
-            isTesting: this.IGV.isTestingAdmob,
+            adId: IGV.AD_MOB_ID_INTER,
+            isTesting: IGV.isTestingAdmob,
             autoShow: true
             //adExtras: this.adExtras
         }
 
         this.adMob.prepareInterstitial(adInterOptions)
-            .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
+            .then(() => { this.adMob.showInterstitial(); IGV.admobCount = IGV.ADMOB_MAX_NUMBER });
         return true;
     }
 
     public showRewardVideoAd() {
+
+        this.loadingPresent();
+
         if (!/(android)/i.test(navigator.userAgent)
             && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
             return false;
@@ -171,30 +174,30 @@ export class GlobalFunc {
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
         adInterOptions = {
-            adId: this.IGV.AD_MOB_ID_VIDEO,
-            isTesting: this.IGV.isTestingAdmob,
+            adId: IGV.AD_MOB_ID_VIDEO,
+            isTesting: IGV.isTestingAdmob,
             autoShow: true
             //adExtras: this.adExtras
         }
 
         this.adMob.prepareRewardVideoAd(adInterOptions)
-            .then(() => { this.adMob.showRewardVideoAd(); });
+            .then(() => { this.loadingDismiss(); this.adMob.showRewardVideoAd(); });
         return true;
     }
 
 
     // -------------  Toast -------------//
     showToastNoNetwork() {
-        if (this.IGV.gLangInd === 'zh') {
+        if (IGV.gLangInd === 'zh') {
             let toast = this.toastCtrl.create({
-                message: this.IGV.NO_NETWORK_CONNECTION_ZH,
+                message: IGV.NO_NETWORK_CONNECTION_ZH,
                 duration: 3000,
                 position: 'top'
             });
             toast.present();
         } else {
             let toast = this.toastCtrl.create({
-                message: this.IGV.NO_NETWORK_CONNECTION_EN,
+                message: IGV.NO_NETWORK_CONNECTION_EN,
                 duration: 3000,
                 position: 'top'
             });

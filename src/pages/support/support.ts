@@ -10,6 +10,9 @@ import { GlobalFunc } from './../../globalFunc/globalFunc';
 })
 export class SupportPage {
 
+  isIOS: boolean;
+  isAndroid: boolean;
+
   appID: string = 'com.hkrain0730';
 
   constructor(
@@ -17,6 +20,13 @@ export class SupportPage {
     public globalFunc: GlobalFunc,
     private appRate: AppRate
   ) {
+    if (/(android)/i.test(navigator.userAgent)) {
+      this.isAndroid = true;
+      this.isIOS = false;
+    } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+      this.isAndroid = false;
+      this.isIOS = true;
+    }
   }
 
   openAppStore() {
@@ -38,5 +48,5 @@ export class SupportPage {
   showInterstitialImmd() {
     this.globalFunc.showInterstitialImmd();
   }
-  
+
 }
