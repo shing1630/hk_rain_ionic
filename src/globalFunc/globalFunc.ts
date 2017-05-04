@@ -24,17 +24,17 @@ export class GlobalFunc {
     }
     // -------------  Alert -------------//
     presentSysErr() {
-        if (IGV.gLangInd === 'zh') {
+        if (this.IGV.gLangInd === 'zh') {
             let alert = this.alertCtrl.create({
-                title: IGV.ERROR_ZH,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_ZH,
+                title: this.IGV.ERROR_ZH,
+                subTitle: this.IGV.SORRY_SOMETHING_WRONG_ZH,
                 buttons: ['OK']
             });
             alert.present();
         } else {
             let alert = this.alertCtrl.create({
-                title: IGV.ERROR_EN,
-                subTitle: IGV.SORRY_SOMETHING_WRONG_EN,
+                title: this.IGV.ERROR_EN,
+                subTitle: this.IGV.SORRY_SOMETHING_WRONG_EN,
                 buttons: ['OK']
             });
             alert.present();
@@ -78,16 +78,16 @@ export class GlobalFunc {
 
     public setAdMobIds() {
         if (/(android)/i.test(navigator.userAgent)) {
-            IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/1638150628';
-            IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/8044611026';
-            IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/9590442629';
+            this.IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/1638150628';
+            this.IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/8044611026';
+            this.IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/9590442629';
         } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-            IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/6068350226';
-            IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/6428277028';
-            IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/8113709427';
+            this.IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/6068350226';
+            this.IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/6428277028';
+            this.IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/8113709427';
         } else {
-            IGV.AD_MOB_ID_BANNER = '';
-            IGV.AD_MOB_ID_INTER = '';
+            this.IGV.AD_MOB_ID_BANNER = '';
+            this.IGV.AD_MOB_ID_INTER = '';
         }
     }
 
@@ -100,9 +100,9 @@ export class GlobalFunc {
         let adBannerOptions: AdMobOptions = <AdMobOptions>{};
 
         adBannerOptions = {
-            adId: IGV.AD_MOB_ID_BANNER,
+            adId: this.IGV.AD_MOB_ID_BANNER,
             position: this.adMob.AD_POSITION.BOTTOM_CENTER,
-            isTesting: IGV.isTestingAdmob,
+            isTesting: this.IGV.isTestingAdmob,
             autoShow: true
             //adExtras: this.adExtras
         }
@@ -123,22 +123,22 @@ export class GlobalFunc {
             return false;
         }
 
-        if (IGV.admobCount > 0) {
-            IGV.admobCount--;
+        if (this.IGV.admobCount > 0) {
+            this.IGV.admobCount--;
             return false;
         }
 
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
         adInterOptions = {
-            adId: IGV.AD_MOB_ID_INTER,
-            isTesting: IGV.isTestingAdmob,
+            adId: this.IGV.AD_MOB_ID_INTER,
+            isTesting: this.IGV.isTestingAdmob,
             autoShow: true
             //adExtras: this.adExtras
         }
 
         this.adMob.prepareInterstitial(adInterOptions)
-            .then(() => { this.adMob.showInterstitial(); IGV.admobCount = IGV.ADMOB_MAX_NUMBER });
+            .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
         return true;
     }
 
@@ -151,14 +151,14 @@ export class GlobalFunc {
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
         adInterOptions = {
-            adId: IGV.AD_MOB_ID_INTER,
-            isTesting: IGV.isTestingAdmob,
+            adId: this.IGV.AD_MOB_ID_INTER,
+            isTesting: this.IGV.isTestingAdmob,
             autoShow: true
             //adExtras: this.adExtras
         }
 
         this.adMob.prepareInterstitial(adInterOptions)
-            .then(() => { this.adMob.showInterstitial(); IGV.admobCount = IGV.ADMOB_MAX_NUMBER });
+            .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
         return true;
     }
 
@@ -174,9 +174,8 @@ export class GlobalFunc {
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
         adInterOptions = {
-            adId: IGV.AD_MOB_ID_VIDEO,
-            isTesting: IGV.isTestingAdmob,
-            autoShow: true
+            adId: this.IGV.AD_MOB_ID_VIDEO,
+            isTesting: this.IGV.isTestingAdmob,
             //adExtras: this.adExtras
         }
 
@@ -188,16 +187,16 @@ export class GlobalFunc {
 
     // -------------  Toast -------------//
     showToastNoNetwork() {
-        if (IGV.gLangInd === 'zh') {
+        if (this.IGV.gLangInd === 'zh') {
             let toast = this.toastCtrl.create({
-                message: IGV.NO_NETWORK_CONNECTION_ZH,
+                message: this.IGV.NO_NETWORK_CONNECTION_ZH,
                 duration: 3000,
                 position: 'top'
             });
             toast.present();
         } else {
             let toast = this.toastCtrl.create({
-                message: IGV.NO_NETWORK_CONNECTION_EN,
+                message: this.IGV.NO_NETWORK_CONNECTION_EN,
                 duration: 3000,
                 position: 'top'
             });
