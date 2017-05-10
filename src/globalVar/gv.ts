@@ -56,6 +56,7 @@ export interface IGV {
 
     AD_MOB_ID_BANNER: string;
     AD_MOB_ID_INTER: string;
+    AD_MOB_ID_INTER_VIDEO: string;
     AD_MOB_ID_VIDEO: string;
 }
 
@@ -129,6 +130,7 @@ export const IGV: IGV = {
 
     AD_MOB_ID_BANNER: '',
     AD_MOB_ID_INTER: '',
+    AD_MOB_ID_INTER_VIDEO: '',
     AD_MOB_ID_VIDEO: ''
 };
 

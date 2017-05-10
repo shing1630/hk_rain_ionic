@@ -80,14 +80,18 @@ export class GlobalFunc {
         if (/(android)/i.test(navigator.userAgent)) {
             this.IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/1638150628';
             this.IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/8044611026';
+            this.IGV.AD_MOB_ID_INTER_VIDEO = 'ca-app-pub-7668464781725150/1376381424';
             this.IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/9590442629';
         } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
             this.IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/6068350226';
             this.IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/6428277028';
+            this.IGV.AD_MOB_ID_INTER_VIDEO = 'ca-app-pub-7668464781725150/2853114621';
             this.IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/8113709427';
         } else {
             this.IGV.AD_MOB_ID_BANNER = '';
             this.IGV.AD_MOB_ID_INTER = '';
+            this.IGV.AD_MOB_ID_INTER_VIDEO = '';
+            this.IGV.AD_MOB_ID_VIDEO = '';
         }
     }
 
@@ -142,7 +146,7 @@ export class GlobalFunc {
         return true;
     }
 
-        public showInterstitialImmd() {
+    public showInterstitialImmd() {
         if (!/(android)/i.test(navigator.userAgent)
             && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
             return false;
@@ -162,6 +166,26 @@ export class GlobalFunc {
         return true;
     }
 
+    public showInterstitialVideoImmd() {
+        if (!/(android)/i.test(navigator.userAgent)
+            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+            return false;
+        }
+
+        let adInterOptions: AdMobOptions = <AdMobOptions>{};
+
+        adInterOptions = {
+            adId: this.IGV.AD_MOB_ID_INTER_VIDEO,
+            isTesting: this.IGV.isTestingAdmob,
+            autoShow: true
+            //adExtras: this.adExtras
+        }
+
+        this.adMob.prepareInterstitial(adInterOptions)
+            .then(() => { this.adMob.showInterstitial(); this.IGV.admobCount = this.IGV.ADMOB_MAX_NUMBER });
+        return true;
+    }
+
     public showRewardVideoAd() {
 
         this.loadingPresent();
@@ -170,7 +194,7 @@ export class GlobalFunc {
             && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
             return false;
         }
-        
+
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
         adInterOptions = {

@@ -49,4 +49,8 @@ export class SupportPage {
     this.globalFunc.showInterstitialImmd();
   }
 
+  showInterstitialVideoImmd() {
+    this.globalFunc.showInterstitialVideoImmd();
+  }
+
 }
