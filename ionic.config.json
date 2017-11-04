@@ -1,8 +1,6 @@
 {
   "name": "hk_rain_ionic",
   "app_id": "",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {}
 }
