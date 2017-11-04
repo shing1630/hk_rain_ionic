@@ -199,14 +199,14 @@ export class CalculateWeather implements OnInit {
         }
         if (currDate.getFullYear() !== selectYear) {
             console.log('all ');
-            for (var i = 1; i <= 12; i++) {
-                var month = { value: i, label: i };
+            for (let i = 1; i <= 12; i++) {
+                let month = { value: i, label: i };
                 monthList.push(month);
             }
         } else {
             let currMonth: number = Number(currDate.getMonth()) + 1;
-            for (var i = currMonth; i <= 12; i++) {
-                var month = { value: i, label: i };
+            for (let i = currMonth; i <= 12; i++) {
+                let month = { value: i, label: i };
                 monthList.push(month);
             }
         }
@@ -228,13 +228,13 @@ export class CalculateWeather implements OnInit {
 
         if (currYear === selectYear && currMonth === selectMonth) {
             let currDay: number = Number(currDate.getDate());
-            for (var i = currDay; i <= this.daysInMonth(selectMonth, selectYear); i++) {
-                var day = { value: i, label: i };
+            for (let i = currDay; i <= this.daysInMonth(selectMonth, selectYear); i++) {
+                let day = { value: i, label: i };
                 dayList.push(day);
             }
         } else {
-            for (var i = 1; i <= this.daysInMonth(selectMonth, selectYear); i++) {
-                var day = { value: i, label: i };
+            for (let i = 1; i <= this.daysInMonth(selectMonth, selectYear); i++) {
+                let day = { value: i, label: i };
                 dayList.push(day);
             }
         }
@@ -257,7 +257,7 @@ export class CalculateWeather implements OnInit {
         let inputDate: Date = new Date(Number(this.selectedYear),
             Number(this.selectedMonth) - 1, Number(this.selectedDay));
 
-        for (var i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) {
             let currDate: Date = new Date();
             currDate.setDate(currDate.getDate() + i);
             currDate.setHours(0, 0, 0, 0);
@@ -309,7 +309,7 @@ export class CalculateWeather implements OnInit {
         let inputDate2: Date = new Date(Number(this.selectedYear2),
             Number(this.selectedMonth2) - 1, Number(this.selectedDay2));
 
-        for (var i = 0; i < 9; i++) {
+        for (let i = 0; i < 9; i++) {
             let currDate: Date = new Date();
             currDate.setDate(currDate.getDate() + i);
             currDate.setHours(0, 0, 0, 0);
