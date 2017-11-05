@@ -1,6 +1,6 @@
 {
   "name": "hk_rain_ionic",
-  "app_id": "",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {},
+  "app_id": ""
 }
