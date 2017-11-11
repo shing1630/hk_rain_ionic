@@ -8,6 +8,23 @@
 </ion-header>
 
 <ion-content>
+    <ion-row>
+        <ion-col col-12 *ngIf="todayForecast !== null" style="padding-left: 0px; padding-right: 0px;">
+            <div class="mainComponent">
+                <div class="centerAndMiddle paddingTo10">
+                    <div class="form-group">
+                        <p class="fontXLarge"><strong>{{'CW.TODAY_WEATHER' | translate}}</strong></p>
+                        <p class="fontMiddle colorToWarning"><strong>{{'WF.HKO_PROVIDED' | translate}}</strong></p>
+                        <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{todayForecast.day}} {{monthMap[todayForecast.month]}} ( {{weekDayEnMap[todayForecast.weekDay]}} ) </strong></p>
+                        <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{todayForecast.month}} {{'WF.MONTH' | translate}} {{todayForecast.day}} {{'WF.DAY' | translate}} ( {{weekDayZhMap[todayForecast.weekDay]}} )</strong></p>
+                        <p  class="fontLarge"><strong>{{todayForecast.temp}}</strong></p>
+                        <p *ngIf="IGV.gLangInd === 'en'" class="fontLarge"><strong>{{todayForecast.desc_en}}</strong></p>
+                        <p *ngIf="IGV.gLangInd === 'zh'" class="fontLarge"><strong>{{todayForecast.desc_zh}}</strong></p>
+                    </div>
+                </div>
+            </div>
+        </ion-col>
+    </ion-row>
     <form id="calInputForm" *ngIf="!showResult && !showForecast">
         <ion-list>
             <ion-item>

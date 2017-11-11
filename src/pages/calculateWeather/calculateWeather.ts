@@ -19,6 +19,8 @@ export class CalculateWeather implements OnInit {
 
     selectedFilterYear: number;
 
+    todayForecast: Forecast = null;
+
     // 1111111 calculate weather 1111111111
     error: any;
     selectYearList: Array<Object>;
@@ -146,6 +148,30 @@ export class CalculateWeather implements OnInit {
         this.init1();
         this.init2();
 
+        this.initForecast();
+    }
+
+    initForecast() {
+        this.globalFunc.loadingPresent();
+        this.forecastService.getForecast()
+          .then(forecastList => {
+            for (var key in forecastList) {
+              if (forecastList.hasOwnProperty(key)) {
+                let currDate: Date = new Date();
+                if (currDate.getDate() === forecastList[0].day) {
+                  currDate.setDate(currDate.getDate() + Number(key));
+                  forecastList[key].weekDay = Number(currDate.getDay());
+                } else {
+                  currDate.setDate(currDate.getDate() + Number(key) + 1);
+                  forecastList[key].weekDay = Number(currDate.getDay());
+                }
+              }
+            }
+            if(forecastList[0] != null){
+              this.todayForecast = forecastList[0];
+            }
+            this.globalFunc.loadingDismiss();
+          }).catch(error => { this.globalFunc.presentSysErr(); this.globalFunc.loadingDismiss(); });
     }
 
     // ------------- Component Change -------------//

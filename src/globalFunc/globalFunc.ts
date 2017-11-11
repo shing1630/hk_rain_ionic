@@ -8,6 +8,7 @@ import { OT_GV, IGV } from './../globalVar/gv';
 export class GlobalFunc {
 
     public loading: any;
+    public isLoading: boolean = false;
 
     constructor(
         @Inject(OT_GV) private IGV: IGV,
@@ -50,20 +51,27 @@ export class GlobalFunc {
         alert.present();
     }
 
+
     // -------------  Loading -------------//
     loadingPresent() {
-        this.loading = this.loadingCtrl.create({
-            spinner: 'hide',
-            content: `
+        if (!this.isLoading) {
+            this.loading = this.loadingCtrl.create({
+                spinner: 'hide',
+                content: `
                 <div class="centerAndMiddle">
-                    <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
+                <img width="50%" height="50%" src="assets/img/logo/hkRain_ain.gif">
                 </div>`,
-        });
-        this.loading.present();
+            });
+            this.loading.present();
+            this.isLoading = true;
+        }
     }
 
     loadingDismiss() {
-        this.loading.dismiss();
+        if (this.isLoading) {
+            this.loading.dismiss();
+            this.isLoading = false;
+        }
     }
 
     public initAds() {
