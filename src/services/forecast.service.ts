@@ -33,7 +33,7 @@ export class ForecastService {
     }
 
     private handleError(error: any) {
-        console.error('Something went wrong...', error);
+        console.error('Something went wrong...', console.log(JSON.stringify(error)));
         return Promise.reject(error.message || error);
     }
 

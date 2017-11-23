@@ -20,7 +20,9 @@ import { AdMob } from '@ionic-native/admob';
 import { GlobalFunc } from './../globalFunc/globalFunc';
 import { AppRate } from '@ionic-native/app-rate';
 import { Market } from '@ionic-native/market';
+import { ChartsModule } from 'ng2-charts';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
+import { WeeklyPredict } from '../pages/weeklyPredict/weeklyPredict';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     WeatherForecast,
     CalculateWeather,
     CalculateWeatherDtl,
+    WeeklyPredict,
     Setting,
     About,
     RptFeedback,
@@ -38,6 +41,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
           backButtonText: ' '
         },
     ),
+    ChartsModule,
     BrowserModule,
     TranslateModule.forRoot({
       provide: TranslateLoader,
@@ -52,6 +56,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
     WeatherForecast,
     CalculateWeather,
     CalculateWeatherDtl,
+    WeeklyPredict,
     Setting,
     About,
     RptFeedback,

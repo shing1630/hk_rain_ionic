@@ -62,9 +62,9 @@ export interface IGV {
 
 export const IGV: IGV = {
 
-    // Change it to false when production
+    // Change Admob to false when production
     isTestingAdmob: false,
-    // Change it to false when production
+    // Change Admob to false when production
 
     ADMOB_MAX_NUMBER: 5,
     admobCount: 5,

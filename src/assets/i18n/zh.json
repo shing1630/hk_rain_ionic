@@ -7,6 +7,7 @@
     "ENG": "ENG",
     "ZH": "繁",
     "9DAY_WEATHER_FORECAST": "九天天氣預報",
+    "WEEKLY_PREDICT": "每週預測",
     "SETTING": "設定",
     "EMPTY": "Empty",
     "ABOUT": "關於",
@@ -54,6 +55,10 @@
     "DAY": "日",
     "GO": "去",
     "BACK": "返回"
+  },
+  "WP": {
+    "WEEKLY_PREDICT": "每週預測",
+    "WEEKLY": "每週"
   },
   "SET": {
     "YEARS_OF_DATA_TO_USE": "利用數據的年數",

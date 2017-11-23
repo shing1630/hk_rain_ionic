@@ -15,6 +15,7 @@ import { SupportPage } from '../pages/support/support';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { Setting } from '../pages/setting/setting';
 import { About } from '../pages/about/about';
+import { WeeklyPredict } from '../pages/weeklyPredict/weeklyPredict';
 
 
 @Component({
@@ -94,6 +95,10 @@ export class MyApp {
       case 'CalculateWeather': {
         toPage = CalculateWeather;
         this.globalFunc.showBanner();
+        break;
+      }
+      case 'WeeklyPredict': {
+        toPage = WeeklyPredict;
         break;
       }
       case 'Setting': {

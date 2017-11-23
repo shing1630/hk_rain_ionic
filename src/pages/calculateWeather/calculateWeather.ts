@@ -224,7 +224,6 @@ export class CalculateWeather implements OnInit {
             selectYear = Number(selectYear);
         }
         if (currDate.getFullYear() !== selectYear) {
-            console.log('all ');
             for (let i = 1; i <= 12; i++) {
                 let month = { value: i, label: i };
                 monthList.push(month);

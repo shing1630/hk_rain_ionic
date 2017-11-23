@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { AlertController, LoadingController, ToastController, Platform } from 'ionic-angular';
 import { AdMob, AdMobOptions } from '@ionic-native/admob';
 import { Market } from '@ionic-native/market';
 import { OT_GV, IGV } from './../globalVar/gv';
@@ -16,6 +16,7 @@ export class GlobalFunc {
         public loadingCtrl: LoadingController,
         public adMob: AdMob,
         private market: Market,
+        public platform: Platform,
         private toastCtrl: ToastController) { }
 
 
@@ -74,6 +75,31 @@ export class GlobalFunc {
         }
     }
 
+    // -------------  Check platform -------------//
+    isAndroid() {
+        if (this.platform.is('android')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isMobileweb() {
+        if (this.platform.is('mobileweb')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isIos() {
+        if (this.platform.is('ios')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public initAds() {
         if (!this.adMob) {
             console.log("AdMob not found.");
@@ -85,12 +111,12 @@ export class GlobalFunc {
     }
 
     public setAdMobIds() {
-        if (/(android)/i.test(navigator.userAgent)) {
+        if (this.isAndroid()) {
             this.IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/1638150628';
             this.IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/8044611026';
             this.IGV.AD_MOB_ID_INTER_VIDEO = 'ca-app-pub-7668464781725150/1376381424';
             this.IGV.AD_MOB_ID_VIDEO = 'ca-app-pub-7668464781725150/9590442629';
-        } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+        } else if (this.isIos()) {
             this.IGV.AD_MOB_ID_BANNER = 'ca-app-pub-7668464781725150/6068350226';
             this.IGV.AD_MOB_ID_INTER = 'ca-app-pub-7668464781725150/6428277028';
             this.IGV.AD_MOB_ID_INTER_VIDEO = 'ca-app-pub-7668464781725150/2853114621';
@@ -104,8 +130,7 @@ export class GlobalFunc {
     }
 
     public showBanner() {
-        if (!/(android)/i.test(navigator.userAgent)
-            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+        if (!this.isAndroid() && !this.isIos()) {
             return false;
         }
 
@@ -125,13 +150,15 @@ export class GlobalFunc {
     }
 
     public removeBanner() {
+        if (!this.isAndroid() && !this.isIos()) {
+            return false;
+        }
         this.adMob.removeBanner();
         return true;
     }
 
     public showInterstitial() {
-        if (!/(android)/i.test(navigator.userAgent)
-            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+        if (!this.isAndroid() && !this.isIos()) {
             return false;
         }
 
@@ -155,8 +182,7 @@ export class GlobalFunc {
     }
 
     public showInterstitialImmd() {
-        if (!/(android)/i.test(navigator.userAgent)
-            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+        if (!this.isAndroid() && !this.isIos()) {
             return false;
         }
 
@@ -175,8 +201,7 @@ export class GlobalFunc {
     }
 
     public showInterstitialVideoImmd() {
-        if (!/(android)/i.test(navigator.userAgent)
-            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+        if (!this.isAndroid() && !this.isIos()) {
             return false;
         }
 
@@ -195,13 +220,11 @@ export class GlobalFunc {
     }
 
     public showRewardVideoAd() {
-
-        this.loadingPresent();
-
-        if (!/(android)/i.test(navigator.userAgent)
-            && !/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+        if (!this.isAndroid() && !this.isIos()) {
             return false;
         }
+
+        this.loadingPresent();
 
         let adInterOptions: AdMobOptions = <AdMobOptions>{};
 
