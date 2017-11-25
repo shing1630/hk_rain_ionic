@@ -12,7 +12,7 @@ import { ResultWeather } from "../models/ResultWeather";
 @Injectable()
 export class WeatherService {
 
-    private baserUrl = 'http://www.hkrain.com/api';  // URL to web api
+    private baserUrl = '/api';  // URL to web api
 
     constructor(private http: Http) { }
 

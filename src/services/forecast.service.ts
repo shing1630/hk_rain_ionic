@@ -7,7 +7,7 @@ import { Forecast } from "../models/Forecast";
 @Injectable()
 export class ForecastService {
 
-    private baserUrl = 'http://www.hkrain.com/api';  // URL to web api
+    private baserUrl = '/api';  // URL to web api
 
     constructor(private http: Http) { }
 
