@@ -11,7 +11,7 @@ import { Feedback } from "../models/Feedback";
 @Injectable()
 export class FeedbackService {
 
-    private baserUrl = '/api';  // URL to web api
+    private baserUrl = 'http://www.hkrain.com/api/';  // URL to web api
 
     constructor(private http: Http) { };
 

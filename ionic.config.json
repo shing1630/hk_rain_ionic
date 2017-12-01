@@ -1,12 +1,8 @@
 {
   "name": "hk_rain_ionic",
   "type": "ionic-angular",
-  "integrations": {},
-  "app_id": "",
-  "proxies": [
-    {
-      "path": "/api",
-      "proxyUrl": "http://www.hkrain.com/api/"
-    }
-  ]
+  "integrations": {
+    "cordova": {}
+  },
+  "app_id": ""
 }

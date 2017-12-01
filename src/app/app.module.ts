@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
 import { CalculateWeatherDtl } from '../pages/calculateWeather/CalculateWeatherDtl';
@@ -71,6 +72,7 @@ import { WeeklyPredict } from '../pages/weeklyPredict/weeklyPredict';
     AppRate,
     Market,
     AdMob,
+    FirebaseAnalytics,
     GlobalFunc,
     Network
   ]
