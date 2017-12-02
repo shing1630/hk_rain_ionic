@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { AlertController, LoadingController, ToastController, Platform } from 'ionic-angular';
 import { AdMob, AdMobOptions } from '@ionic-native/admob';
-import { Market } from '@ionic-native/market';
 import { OT_GV, IGV } from './../globalVar/gv';
 
 @Injectable()
@@ -15,15 +14,9 @@ export class GlobalFunc {
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public adMob: AdMob,
-        private market: Market,
         public platform: Platform,
         private toastCtrl: ToastController) { }
 
-
-    // Open app store / market
-    openMarket(appStoreID: string) {
-        this.market.open(appStoreID);
-    }
     // -------------  Alert -------------//
     presentSysErr() {
         if (this.IGV.gLangInd === 'zh') {

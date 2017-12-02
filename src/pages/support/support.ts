@@ -29,10 +29,6 @@ export class SupportPage {
     }
   }
 
-  openAppStore() {
-    this.globalFunc.openMarket(this.appID)
-  }
-
   openStoreRate() {
     this.appRate.preferences.storeAppURL = {
       ios: this.appID,

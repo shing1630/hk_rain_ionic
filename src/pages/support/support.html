@@ -26,11 +26,13 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 class="centerAndMiddle">
-        <button *ngIf="isAndroid" ion-button (click)="openAppStore()" style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
-          <ion-icon name="code-download"></ion-icon>
-        </button>
-        <a href="https://appsto.re/hk/zMbVib.i">
-          <button *ngIf="isIOS" ion-button style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
+        <a *ngIf="isAndroid" href="https://play.google.com/store/apps/details?id=com.hkrain0730">
+          <button ion-button style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
+            <ion-icon name="code-download"></ion-icon>
+          </button>
+        </a> 
+        <a *ngIf="isIOS" href="https://appsto.re/hk/zMbVib.i">
+          <button ion-button style="min-width: 50px; min-height:30px; max-width: 50px; max-height:30px">
             <ion-icon name="code-download"></ion-icon>
           </button>
         </a> 

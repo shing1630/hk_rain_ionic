@@ -20,7 +20,6 @@ import { Network } from '@ionic-native/network';
 import { AdMob } from '@ionic-native/admob';
 import { GlobalFunc } from './../globalFunc/globalFunc';
 import { AppRate } from '@ionic-native/app-rate';
-import { Market } from '@ionic-native/market';
 import { ChartsModule } from 'ng2-charts';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 import { WeeklyPredict } from '../pages/weeklyPredict/weeklyPredict';
@@ -70,7 +69,6 @@ import { WeeklyPredict } from '../pages/weeklyPredict/weeklyPredict';
     WeatherService,
     FeedbackService,
     AppRate,
-    Market,
     AdMob,
     FirebaseAnalytics,
     GlobalFunc,
