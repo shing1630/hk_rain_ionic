@@ -277,6 +277,8 @@ export class CalculateWeather implements OnInit {
         this.globalFunc.removeBanner();
         this.globalFunc.loadingPresent();
 
+        this.globalFunc.logFirebase('calWeather', 'home');
+
         //check forecast Date
         let isForecast: boolean = false;
         let inputDate: Date = new Date(Number(this.selectedYear),
@@ -328,6 +330,8 @@ export class CalculateWeather implements OnInit {
     calWeather2() {
         this.globalFunc.removeBanner();
         this.globalFunc.loadingPresent();
+
+        this.globalFunc.logFirebase('calWeather2', 'home');
 
         //check forecast Date
         let isForecast2: boolean = false;

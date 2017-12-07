@@ -50,6 +50,9 @@ export class WeeklyPredict {
   }
 
   ngOnInit() {
+
+    this.globalFunc.logFirebase('predict', 'weeklyPredict');
+    
     this.weeklySelectList = [];
     this.weatherService.getWeeklySelectList()
     .then(weeklySelectList => {
@@ -78,7 +81,7 @@ export class WeeklyPredict {
       this.weatherService.getWeeklyPredictResult(weeklySelectStr, IGV.filterYear)
       .then(result => {
           this.lineChartData =  [
-            {data: result.weekPredictList}
+            {data: result.weekPredictList, label: 'Raining %'}
           ];
           setTimeout(() => this.lineChartLabels = result.weekLabelList, 0);
       });

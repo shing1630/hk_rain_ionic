@@ -5,7 +5,6 @@ import { TranslateService } from 'ng2-translate';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { Storage } from '@ionic/storage';
 import { Network } from '@ionic-native/network';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 import { OT_GV, IGV } from './../globalVar/gv';
 import { GlobalFunc } from './../globalFunc/globalFunc';
@@ -35,7 +34,6 @@ export class MyApp {
     public translate: TranslateService,
     public storage: Storage,
     public globalFunc: GlobalFunc,
-    public firebaseAnalytics: FirebaseAnalytics,
     public network: Network
   ) {
     this.initializeApp(translate);
@@ -53,12 +51,8 @@ export class MyApp {
       this.translate.use('zh');
       this.IGV.gLangInd = 'zh';
 
-      if (this.globalFunc.isAndroid() || this.globalFunc.isIos()) {
-        this.firebaseAnalytics.logEvent('page_view', {page: "dashboard"})
-        .then((res: any) => alert(res))
-        .catch((error: any) => alert(error));
-      }
-      
+      this.globalFunc.logFirebase('open_app', 'home');
+
       // For local storage
       this.storage.ready().then(() => {
 

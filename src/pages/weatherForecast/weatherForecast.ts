@@ -31,6 +31,9 @@ export class WeatherForecast {
 
   ngOnInit() {
     this.globalFunc.loadingPresent();
+
+    this.globalFunc.logFirebase('forecast', 'weatherForecast');
+
     this.forecastService.getForecast()
       .then(forecastList => {
         this.forecastList = forecastList;
