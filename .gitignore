@@ -4,6 +4,8 @@
 google-services.json
 GoogleService-Info.plist
 
+package-lock.json
+
 *~
 *.sw[mnpcod]
 *.log
