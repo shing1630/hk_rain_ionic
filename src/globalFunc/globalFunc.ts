@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { AlertController, LoadingController, ToastController, Platform } from 'ionic-angular';
 import { AdMob, AdMobOptions } from '@ionic-native/admob';
 import { OT_GV, IGV } from './../globalVar/gv';
-import { FirebaseAnalytics } from '@ionic-native/firebase-analytics';
 
 @Injectable()
 export class GlobalFunc {
@@ -16,16 +15,15 @@ export class GlobalFunc {
         public loadingCtrl: LoadingController,
         public adMob: AdMob,
         public platform: Platform,
-        public firebaseAnalytics: FirebaseAnalytics,
         private toastCtrl: ToastController) { }
 
 
     // -------------  Firebase Analytics -------------//
     logFirebase(event: string, page:string) {
         if (this.isAndroid() || this.isIos()) {
-            this.firebaseAnalytics.logEvent(event, {page: page})
-            .then((res: any) => console.log(res))
-            .catch((error: any) => console.log(error));
+            // this.firebaseAnalytics.logEvent(event, {page: page})
+            // .then((res: any) => console.log(res))
+            // .catch((error: any) => console.log(error));
         }
     }
 
