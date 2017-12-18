@@ -19,6 +19,7 @@
             <ion-option *ngFor="let week of weeklySelectList" value="{{week.value}}">{{week.label}}</ion-option>
           </ion-select>
         </ion-item>
+        <ion-label center text-center class="applyBasicColor">{{ 'WP.RAIN_PERCENTAGE' | translate }}</ion-label>
       </div>
       <canvas baseChart width="300" height="400"
       [datasets]="lineChartData"

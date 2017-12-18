@@ -58,7 +58,8 @@
   },
   "WP": {
     "WEEKLY_PREDICT": "Weekly Predict",
-    "WEEKLY": "Weekly"
+    "WEEKLY": "Weekly",
+    "RAIN_PERCENTAGE": "Raining Percentage %"
   },
   "SET": {
     "YEARS_OF_DATA_TO_USE": "Years of data to use",

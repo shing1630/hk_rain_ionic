@@ -58,7 +58,8 @@
   },
   "WP": {
     "WEEKLY_PREDICT": "每週預測",
-    "WEEKLY": "每週"
+    "WEEKLY": "每週",
+    "RAIN_PERCENTAGE": "下雨率 %"
   },
   "SET": {
     "YEARS_OF_DATA_TO_USE": "利用數據的年數",
