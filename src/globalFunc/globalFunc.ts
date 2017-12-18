@@ -19,7 +19,6 @@ export class GlobalFunc {
         public firebase: Firebase,
         public toastCtrl: ToastController) { }
 
-
     // -------------  Firebase Analytics -------------//
     logFirebase(event: string, page:string) {
         if (this.isAndroid() || this.isIos()) {
