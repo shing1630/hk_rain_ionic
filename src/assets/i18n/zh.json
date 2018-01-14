@@ -1,6 +1,8 @@
 {
   "MAIN": {
-    "HK_RAIN": "香港雨"
+    "HK_RAIN": "香港雨",
+    "OK": "好",
+    "CANCEL": "取消"
   },
   "MENU": {
     "HOME": "首頁",

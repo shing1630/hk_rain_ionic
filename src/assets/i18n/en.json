@@ -1,6 +1,8 @@
 {
   "MAIN": {
-    "HK_RAIN": "HK Rain"
+    "HK_RAIN": "HK Rain",
+    "OK": "OK",
+    "CANCEL": "Cancel"
   },
   "MENU": {
     "HOME": "Home",

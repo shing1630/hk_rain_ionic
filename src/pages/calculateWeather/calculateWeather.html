@@ -29,21 +29,24 @@
         <ion-list>
             <ion-item>
                 <ion-label>{{ 'CW.YEAR' | translate }}</ion-label>
-                <ion-select id="year" name="year" [(ngModel)]="selectedYear" (ngModelChange)="yearChange()">
+                <ion-select id="year" name="year" okText="{{'MAIN.OK' | translate}}" cancelText="{{'MAIN.CANCEL' | translate}}"
+                            [(ngModel)]="selectedYear" (ngModelChange)="yearChange()">
                     <ion-option *ngFor="let year of selectYearList" value="{{year.value}}">{{year.label}}</ion-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
                 <ion-label>{{ 'CW.MONTH' | translate }}</ion-label>
-                <ion-select id="month" name="month" [(ngModel)]="selectedMonth" (ngModelChange)="monthChange()">
+                <ion-select id="month" name="month" okText="{{'MAIN.OK' | translate}}" cancelText="{{'MAIN.CANCEL' | translate}}"
+                            [(ngModel)]="selectedMonth" (ngModelChange)="monthChange()">
                     <ion-option *ngFor="let month of selectMonthList" value="{{month.value}}">{{month.label}}</ion-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
                 <ion-label>{{ 'CW.DAY' | translate }}</ion-label>
-                <ion-select id="day" name="day" [(ngModel)]="selectedDay" [disabled]="dayDisable">
+                <ion-select id="day" name="day" okText="{{'MAIN.OK' | translate}}" cancelText="{{'MAIN.CANCEL' | translate}}"
+                            [(ngModel)]="selectedDay" [disabled]="dayDisable">
                     <ion-option *ngFor="let day of selectDayList" value="{{day.value}}">{{day.label}}</ion-option>
                 </ion-select>
             </ion-item>
@@ -168,21 +171,24 @@
         <ion-list>
             <ion-item>
                 <ion-label>{{ 'CW.YEAR' | translate }}</ion-label>
-                <ion-select id="year2" name="year2" [(ngModel)]="selectedYear2" (ngModelChange)="yearChange2()">
+                <ion-select id="year2" name="year2" okText="{{'MAIN.OK' | translate}}" cancelText="{{'MAIN.CANCEL' | translate}}"
+                            [(ngModel)]="selectedYear2" (ngModelChange)="yearChange2()">
                     <ion-option *ngFor="let year2 of selectYearList2" value="{{year2.value}}">{{year2.label}}</ion-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
                 <ion-label>{{ 'CW.MONTH' | translate }}</ion-label>
-                <ion-select id="month2" name="month2" [(ngModel)]="selectedMonth2" (ngModelChange)="monthChange2()">
+                <ion-select id="month2" name="month2" okText="{{'MAIN.OK' | translate}}" cancelText="{{'MAIN.CANCEL' | translate}}"
+                            [(ngModel)]="selectedMonth2" (ngModelChange)="monthChange2()">
                     <ion-option *ngFor="let month2 of selectMonthList" value="{{month2.value}}">{{month2.label}}</ion-option>
                 </ion-select>
             </ion-item>
 
             <ion-item>
                 <ion-label>{{ 'CW.DAY' | translate }}</ion-label>
-                <ion-select id="day2" name="day2" [(ngModel)]="selectedDay2" [disabled]="dayDisable2">
+                <ion-select id="day2" name="day2" okText="{{'MAIN.OK' | translate}}" cancelText="{{'MAIN.CANCEL' | translate}}"
+                            [(ngModel)]="selectedDay2" [disabled]="dayDisable2">
                     <ion-option *ngFor="let day2 of selectDayList2" value="{{day2.value}}">{{day2.label}}</ion-option>
                 </ion-select>
             </ion-item>
