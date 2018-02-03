@@ -6,7 +6,7 @@ import { ResultWeather } from "../../models/ResultWeather";
 import { Forecast } from "../../models/Forecast";
 import { WeatherService } from "../../services/weather.service";
 import { ForecastService } from "../../services/forecast.service";
-import { CalculateWeatherDtl } from "../../pages/calculateWeather/CalculateWeatherDtl";
+import { CalculateWeatherDtl } from "../../pages/calculateWeather/calculateWeatherDtl";
 import { OT_GV, IGV } from './../../globalVar/gv';
 import { GlobalFunc } from './../../globalFunc/globalFunc';
 
