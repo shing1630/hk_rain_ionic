@@ -5,7 +5,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { WeatherForecast } from '../pages/weatherForecast/weatherForecast';
 import { CalculateWeather } from '../pages/calculateWeather/calculateWeather';
-import { CalculateWeatherDtl } from '../pages/calculateWeather/CalculateWeatherDtl';
+import { CalculateWeatherDtl } from '../pages/calculateWeather/calculateWeatherDtl';
 import { Setting } from '../pages/setting/setting';
 import { About } from '../pages/about/about';
 import { RptFeedback } from '../pages/rptFeedback/rptFeedback';
